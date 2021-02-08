@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:57:41 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/05 10:43:46 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/08 19:23:44 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,53 @@ void	printmap(t_hook *h)
 	printf("\n\n");
 }
 
+int			unset_key(int keycode, t_hook *h)
+{
+	double olddirx;
+	double oldplanex;
+
+	if (keycode == 123)
+		h->sp->lr = 0;
+	if (keycode == 124)
+		h->sp->lr = 0;
+	if (keycode == 13)
+		h->sp->fb = 0;
+	if (keycode == 257)
+	{
+		h->sp->jump = 0;
+		h->sp->appo = 0;
+	}
+	if (keycode == 12)
+		h->sp->sprint = 0;
+	return (0);
+}
+
 int			set_key(int keycode, t_hook *h)
 {
 	double olddirx;
 	double oldplanex;
 
 	if (keycode == 123)
+		h->sp->lr = 1;
+	if (keycode == 124)
+		h->sp->lr = -1;
+	if (keycode == 13)
+		h->sp->fb = 1;
+	if (keycode == 49)
+		h->sp->jump = 1;
+	if (keycode == 257)
+		h->sp->jump = -1;
+	if (keycode == 12)
+		h->sp->sprint = 1;
+	return (0);
+}
+
+int			set_key_render(t_hook *h)
+{
+	double olddirx;
+	double oldplanex;
+
+	if (h->sp->lr == 1)
 	{
 		olddirx = h->sp->dirx;
 		h->sp->dirx = h->sp->dirx * cos(-h->sp->rotspeed) - h->sp->diry
@@ -91,7 +132,7 @@ int			set_key(int keycode, t_hook *h)
 		h->sp->planey = oldplanex * sin(-h->sp->rotspeed) + h->sp->planey
 					* cos(-h->sp->rotspeed);
 	}
-	if (keycode == 124)
+	if (h->sp->lr == -1)
 	{
 		olddirx = h->sp->dirx;
 		h->sp->dirx = h->sp->dirx * cos(h->sp->rotspeed) - h->sp->diry
@@ -104,7 +145,7 @@ int			set_key(int keycode, t_hook *h)
 		h->sp->planey = oldplanex * sin(h->sp->rotspeed) + h->sp->planey
 					* cos(h->sp->rotspeed);
 	}
-	if (keycode == 13)
+	if (h->sp->fb == 1)
 	{
 		//printmap(h);
 		if (h->map[(int)(h->sp->posy + h->sp->diry * h->sp->movspeed)][(int)(h->sp->posx)] != '1')
@@ -112,17 +153,40 @@ int			set_key(int keycode, t_hook *h)
 		if (h->map[(int)(h->sp->posy)][(int)(h->sp->posx + h->sp->dirx * h->sp->movspeed)] != '1')
 			h->sp->posx += h->sp->dirx * h->sp->movspeed;
 	}
+	if (h->sp->jump == 1)
+	{
+		if (!h->sp->appo)
+			h->sp->appo = 1;
+		if ((h->sp->appo * 2) < 200 && h->sp->swjp == 0)
+			h->sp->appo += 30;
+		else if ((h->sp->appo * 2) > 200 && h->sp->swjp == 0)
+			h->sp->swjp = 1;
+		if ((h->sp->appo / 2) <= 0 && h->sp->swjp == 1)
+		{
+			h->sp->jump = 0;
+			h->sp->swjp = 0;
+			h->sp->appo = 1;
+		}
+		else if ((h->sp->appo / 2) > 0 && h->sp->swjp == 1)
+			h->sp->appo = h->sp->appo - 30;
+	}
+	if (h->sp->jump == -1)
+		h->sp->appo = -30;
+	if (h->sp->sprint == 1)
+		h->sp->movspeed = 0.13;
+	raycasting(h);
 	return (0);
 }
 
 void		rendering(char **map, t_var var)
 {
-	t_vars	vars;
-	t_data	img;
-	t_spawn	sp;
-	t_hook	h;
+	t_vars		vars;
+	t_data		img;
+	t_spawn		sp;
+	t_hook		h;
+	t_sprite	**s;
 
-	init_spawn(map, &sp);
+	init_spawn(map, &sp, &s);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, var.rx, var.ry, "Cub3D");
 	img.img = mlx_new_image(vars.mlx, var.rx, var.ry);
@@ -134,8 +198,8 @@ void		rendering(char **map, t_var var)
 	h.vars = vars;
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_hook(vars.win, 2, 1L << 0, set_key, &h);
-	mlx_hook(vars.win, 2, 1L << 1, set_key, &h);
-	mlx_loop_hook(vars.mlx, raycasting, &h);
+	mlx_hook(vars.win, 3, 1L << 1, unset_key, &h);
+	mlx_loop_hook(vars.mlx, set_key_render, &h);
 	mlx_loop(vars.mlx);
 	map = NULL;
 }

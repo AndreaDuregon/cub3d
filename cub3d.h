@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/05 10:48:42 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/08 19:23:37 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,13 @@ typedef struct		s_spawn
 	int				lineheight;
 	int				drawstart;
 	int				drawend;
+	int				lr;
+	int				fb;
+	int				jump;
+	int				appo;
+	int				swjp;
+	int				sprint;
+	int				hit_sprite;
 	double			movspeed;
 	double			rotspeed;
 }					t_spawn;
@@ -97,6 +104,13 @@ typedef struct		s_tex
 	char			*buff;
 }					t_tex;
 
+typedef	struct		s_sprite
+{
+	double			x;
+	double			y;
+	int				texture;
+}					t_sprite;
+
 typedef struct		s_hook
 {
 	t_spawn			*sp;
@@ -104,7 +118,7 @@ typedef struct		s_hook
 	char			**map;
 	t_data			img;
 	t_vars			vars;
-	t_tex			*tex[4];
+	t_tex			*tex[5];
 }					t_hook;
 
 void				var_parsing(int fd, t_var *var);
@@ -141,7 +155,8 @@ void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int					create_trgb(int t, int r, int g, int b);
 t_hook				hook_init(char **map, t_var var, t_spawn spawn,
 								t_vars vars);
-void				init_spawn(char **map, t_spawn *sp);
+int					set_key(int keycode, t_hook *h);
+void				init_spawn(char **map, t_spawn *sp, t_sprite **s);
 int					raycasting(t_hook *h);
 int					key_hook(int keycode);
 void				print_background(t_var var, t_data img);
