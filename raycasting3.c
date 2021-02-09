@@ -1,0 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting3.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/09 18:53:49 by aduregon          #+#    #+#             */
+/*   Updated: 2021/02/09 19:00:53 by aduregon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+void		side_zero(t_hook *h, int x, int y, int color)
+{
+	h->sp->texy = (int)h->sp->texpos & (h->tex[0]->height - 1);
+	color = ((h->tex)[0])->buff[(int)(h->tex[0]->height *
+								h->sp->texy + h->sp->texx)];
+	draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[0],
+		h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+}
+
+void		side_one(t_hook *h, int x, int y, int color)
+{
+	h->sp->texy = (int)h->sp->texpos & (h->tex[1]->height - 1);
+	color = ((h->tex)[1])->buff[(int)(h->tex[1]->height *
+								h->sp->texy + h->sp->texx)];
+	draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[1],
+			h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+}
+
+void		side_two(t_hook *h, int x, int y, int color)
+{
+	h->sp->texy = (int)h->sp->texpos & (h->tex[3]->height - 1);
+	color = ((h->tex)[3])->buff[(int)(h->tex[3]->height *
+								h->sp->texy + h->sp->texx)];
+	draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[3],
+		h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+}
+
+void		side_three(t_hook *h, int x, int y, int color)
+{
+	h->sp->texy = (int)h->sp->texpos & (h->tex[2]->height - 1);
+	color = ((h->tex)[2])->buff[(int)(h->tex[2]->height *
+								h->sp->texy + h->sp->texx)];
+	draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[2],
+		h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+}
+
+void		print_wall(t_hook *h, int x)
+{
+	int	y;
+	int	color;
+
+	color = 0;
+	if (h->map[h->sp->mapy][h->sp->mapx] == '1')
+	{
+		y = h->sp->drawstart;
+		while (y <= h->sp->drawend)
+		{
+			h->sp->texpos += h->sp->step;
+			if (h->sp->side == 0)
+				side_zero(h, x, y, color);
+			else if (h->sp->side == 1)
+				side_one(h, x, y, color);
+			else if (h->sp->side == 2)
+				side_two(h, x, y, color);
+			else if (h->sp->side == 3)
+				side_three(h, x, y, color);
+			y++;
+		}
+	}
+	h->sp->zbuff[x] = h->sp->perpwalldist;
+}

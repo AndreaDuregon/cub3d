@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/09 17:09:23 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/09 19:11:14 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,5 +184,13 @@ int					getcolor(t_tex *tex, int x, int y, int fade);
 int					key_hook(int keycode);
 void				print_background(t_var var, t_data img);
 void				sprite_calc(t_hook *h);
+void				pwd_calc(t_spawn *sp);
+void				height_calc(t_spawn *sp, t_var var);
+void				set_speed(t_spawn *sp);
+void				print_wall(t_hook *h, int x);
+void				ray_calc(t_spawn *sp, t_var var, int x);
+void				var_dda(t_spawn *sp);
+void				dda(t_spawn *sp, char **map);
+void				tex_coord(t_spawn *sp, t_var var);
 
 #endif

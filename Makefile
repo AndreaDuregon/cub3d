@@ -1,7 +1,7 @@
 NAME	=	cub3d
 LIBFT	=	./libft/libft.a
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	
 RM		=	rm -f
 LIBS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit -lm
 MLX		=	libmlx.dylib
@@ -20,6 +20,9 @@ SRCS	=	cub3d.c \
 			rendering.c \
 			define_dir.c \
 			raycasting.c \
+			raycasting2.c \
+			raycasting3.c \
+			raycasting4.c \
 			init.c \
 			sprite.c
 

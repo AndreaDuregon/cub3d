@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 17:20:27 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/09 14:08:13 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/09 19:11:31 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ t_sprite		**init_spawn(char **map, t_spawn *sp, t_sprite **s)
 	int j;
 	int count;
 	int k;
-	int g;
 
 	count = count_sprite(map);
 	if (!(s = malloc(sizeof(t_sprite **) * (count + 1))))

@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:57:41 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/09 14:09:31 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/09 19:11:43 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,6 @@ void	printmap(t_hook *h)
 
 int			unset_key(int keycode, t_hook *h)
 {
-	double olddirx;
-	double oldplanex;
-
 	if (keycode == 123)
 		h->sp->lr = 0;
 	if (keycode == 124)
@@ -96,9 +93,6 @@ int			unset_key(int keycode, t_hook *h)
 
 int			set_key(int keycode, t_hook *h)
 {
-	double olddirx;
-	double oldplanex;
-
 	if (keycode == 123)
 		h->sp->lr = 1;
 	if (keycode == 124)
@@ -187,6 +181,7 @@ void		rendering(char **map, t_var var)
 	t_sprite	**s;
 	t_spr		sprt;
 
+	s = NULL;
 	s = init_spawn(map, &sp, s);
 	if (!(sp.zbuff = malloc(sizeof(double) * (var.rx + 1))))
 		return ;
