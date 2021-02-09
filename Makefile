@@ -1,7 +1,7 @@
 NAME	=	cub3d
 LIBFT	=	./libft/libft.a
 CC		=	gcc
-CFLAGS	=	
+CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f
 LIBS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit -lm
 MLX		=	libmlx.dylib
@@ -20,7 +20,8 @@ SRCS	=	cub3d.c \
 			rendering.c \
 			define_dir.c \
 			raycasting.c \
-			init.c
+			init.c \
+			sprite.c
 
 OBJ		=	$(SRCS:.c=.o)
 

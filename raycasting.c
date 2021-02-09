@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 11:18:39 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/05 12:27:09 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/09 17:12:40 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,25 +72,6 @@ void		dda(t_spawn *sp, char **map)
 		}
 		if (map[sp->mapy][sp->mapx] == '1')
 			sp->hit = 1;
-	}
-}
-
-void		dda_sprite(t_spawn *sp, char **map)
-{
-	while (sp->hit_sprite == 0)
-	{
-		if (sp->sidedistx < sp->sidedisty)
-		{
-			sp->sidedistx += sp->deltadistx;
-			sp->mapx += sp->stepx;
-		}
-		else if (sp->sidedistx > sp->sidedisty)
-		{
-			sp->sidedisty += sp->deltadisty;
-			sp->mapy += sp->stepy;
-		}
-		if (map[sp->mapy][sp->mapx] == '2')
-			sp->hit_sprite = 1;
 	}
 }
 
@@ -170,32 +151,9 @@ int		getcolor(t_tex *tex, int x, int y, int fade)
 	return (color);
 }
 
-void		print_sprite(t_hook *h, int x)
-{
-	int	y;
-	int	temp;
-	int	color;
-
-	if (h->map[h->sp->mapy][h->sp->mapx] == '1')
-	{
-		y = h->sp->drawstart;
-		while (y <= h->sp->drawend)
-		{
-			h->sp->texpos += h->sp->step;
-			
-			h->sp->texy = (int)h->sp->texpos & (h->tex[4]->height - 1);
-			color = ((h->tex)[4])->buff[(int)(h->tex[4]->height * h->sp->texy + h->sp->texx)];
-			draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[4],
-				h->sp->texx, h->sp->texy, h->sp->perpwalldist));
-			y++;
-		}
-	}
-}
-
 void		print_wall2(t_hook *h, int x)
 {
 	int	y;
-	int	temp;
 	int	color;
 
 	if (h->map[h->sp->mapy][h->sp->mapx] == '1')
@@ -235,13 +193,13 @@ void		print_wall2(t_hook *h, int x)
 			y++;
 		}
 	}
+	h->sp->zbuff[x] = h->sp->perpwalldist;
 }
 
 void		print_wall(t_hook *h, int x)
 {
 	int y;
-	int temp;
-
+	
 	if (h->map[h->sp->mapy][h->sp->mapx] == '1')
 	{
 		y = h->sp->drawstart;
@@ -271,21 +229,22 @@ int			raycasting(t_hook *h)
 	h->img.addr = mlx_get_data_addr(h->img.img, &h->img.bits_per_pixel,
 									&h->img.line_length, &h->img.endian);
 	print_background(h->var, h->img);
+	x = 0;
 	while (x < h->var.rx)
 	{
 		ray_calc(h->sp, h->var, x);
 		var_dda(h->sp);
 		dda(h->sp, h->map);
-		//dda_sprite(h->sp, h->map);
 		pwd_calc(h->sp);
 		height_calc(h->sp, h->var);
 		tex_coord(h->sp, h->var);
 		print_wall2(h, x);
-		//print_sprite(h, x);
 		if (!h->sp->sprint)
 			set_speed(h->sp);
 		x++;
 	}
+	x = 0;
+	sprite_calc(h);
 	mlx_put_image_to_window(h->vars.mlx, h->vars.win, h->img.img, 0, 0);
 	if (!(mlx_destroy_image(h->vars.mlx, h->img.img)))
 		return (0);

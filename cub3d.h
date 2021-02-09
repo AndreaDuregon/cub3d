@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/08 19:23:37 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/09 17:09:23 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,27 @@ typedef struct		s_spawn
 	int				hit_sprite;
 	double			movspeed;
 	double			rotspeed;
+	double			*zbuff;
 }					t_spawn;
+
+typedef struct		s_spr
+{
+	double			spritex;
+	double			spritey;
+	double			invcam;
+	double			transx;
+	double			transy;
+	int				screenx;
+	int				sprheight;
+	int				sprwidth;
+	int				sprdrawstartx;
+	int				sprdrawstarty;
+	int				sprdrawendx;
+	int				sprdrawendy;
+	int				stripe;
+	int				texx;
+	int				texy;
+}					t_spr;
 
 typedef struct		s_tex
 {
@@ -108,12 +128,13 @@ typedef	struct		s_sprite
 {
 	double			x;
 	double			y;
-	int				texture;
 }					t_sprite;
 
 typedef struct		s_hook
 {
 	t_spawn			*sp;
+	t_spr			*spr;
+	t_sprite		**sprite;
 	t_var			var;
 	char			**map;
 	t_data			img;
@@ -154,11 +175,14 @@ void				rendering(char **map, t_var var);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int					create_trgb(int t, int r, int g, int b);
 t_hook				hook_init(char **map, t_var var, t_spawn spawn,
-								t_vars vars);
+								t_vars vars, t_spr sprt);
 int					set_key(int keycode, t_hook *h);
-void				init_spawn(char **map, t_spawn *sp, t_sprite **s);
+t_sprite			**init_spawn(char **map, t_spawn *sp, t_sprite **s);
 int					raycasting(t_hook *h);
+void				draw_dot(t_hook *h, int x, int y, int color);
+int					getcolor(t_tex *tex, int x, int y, int fade);
 int					key_hook(int keycode);
 void				print_background(t_var var, t_data img);
+void				sprite_calc(t_hook *h);
 
 #endif

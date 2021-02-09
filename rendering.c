@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:57:41 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/08 19:23:44 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/09 14:09:31 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,15 +185,19 @@ void		rendering(char **map, t_var var)
 	t_spawn		sp;
 	t_hook		h;
 	t_sprite	**s;
+	t_spr		sprt;
 
-	init_spawn(map, &sp, &s);
+	s = init_spawn(map, &sp, s);
+	if (!(sp.zbuff = malloc(sizeof(double) * (var.rx + 1))))
+		return ;
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, var.rx, var.ry, "Cub3D");
 	img.img = mlx_new_image(vars.mlx, var.rx, var.ry);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
 	print_background(var, img);
-	h = hook_init(map, var, sp, vars);
+	h = hook_init(map, var, sp, vars, sprt);
+	h.sprite = s;
 	h.img = img;
 	h.vars = vars;
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);

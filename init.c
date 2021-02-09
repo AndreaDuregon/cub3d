@@ -6,13 +6,13 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 17:20:27 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/08 20:19:53 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/09 14:08:13 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_hook		hook_init(char **map, t_var var, t_spawn spawn, t_vars vars)
+t_hook		hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt)
 {
 	t_hook	h;
 	int		width;
@@ -26,6 +26,7 @@ t_hook		hook_init(char **map, t_var var, t_spawn spawn, t_vars vars)
 	h.map = map;
 	h.var = var;
 	h.sp = &spawn;
+	h.spr = &sprt;
 	return (h);
 }
 
@@ -90,16 +91,17 @@ int			count_sprite(char **map)
 	return (count);
 }
 
-void		init_spawn(char **map, t_spawn *sp, t_sprite **s)
+t_sprite		**init_spawn(char **map, t_spawn *sp, t_sprite **s)
 {
 	int i;
 	int j;
 	int count;
 	int k;
-	
+	int g;
+
 	count = count_sprite(map);
 	if (!(s = malloc(sizeof(t_sprite **) * (count + 1))))
-		return ;
+		return (NULL);
 	i = 0;
 	k = 0;
 	while (map[i])
@@ -117,7 +119,7 @@ void		init_spawn(char **map, t_spawn *sp, t_sprite **s)
 			else if (map[i][j] == '2')
 			{
 				if (!(s[k] = malloc(sizeof(t_sprite *) * (count + 1))))
-					return ;
+					return (NULL);
 				s[k]->x = (double)i + 0.5;
 				s[k]->y = (double)j + 0.5;
 				k++;
@@ -126,4 +128,6 @@ void		init_spawn(char **map, t_spawn *sp, t_sprite **s)
 		}
 		i++;
 	}
+	s[k] = NULL;
+	return (s);
 }
