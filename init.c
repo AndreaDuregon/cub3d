@@ -6,13 +6,13 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 17:20:27 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/09 19:11:31 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 10:13:27 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_hook		hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt)
+t_hook			hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt)
 {
 	t_hook	h;
 	int		width;
@@ -30,46 +30,7 @@ t_hook		hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt)
 	return (h);
 }
 
-void		set_dir(t_spawn *sp, char c)
-{
-	sp->lr = 0;
-	sp->fb = 0;
-	sp->jump = 0;
-	sp->appo = 0;
-	sp->swjp = 0;
-	sp->sprint = 0;
-	sp->hit_sprite = 0;
-	if (c == 'N')
-	{
-		sp->dirx = 0;
-		sp->diry = -1;
-		sp->planex = -0.66;
-		sp->planey = 0;
-	}
-	else if (c == 'E')
-	{
-		sp->dirx = 1;
-		sp->diry = 0;
-		sp->planex = 0;
-		sp->planey = -0.66;
-	}
-	else if (c == 'S')
-	{
-		sp->dirx = 0;
-		sp->diry = 1;
-		sp->planex = 0.66;
-		sp->planey = 0;
-	}
-	else if (c == 'W')
-	{
-		sp->dirx = -1;
-		sp->diry = 0;
-		sp->planex = 0;
-		sp->planey = 0.66;
-	}
-}
-
-int			count_sprite(char **map)
+int				count_sprite(char **map)
 {
 	int i;
 	int j;
@@ -91,42 +52,47 @@ int			count_sprite(char **map)
 	return (count);
 }
 
+void			set_pos(char **map, t_spawn *sp, int i[3])
+{
+	set_dir(sp, map[i[0]][i[1]]);
+	sp->posy = (double)i[0] + 0.5;
+	sp->posx = (double)i[1] + 0.5;
+}
+
+int				set_sprite(t_sprite **s, int i[3], int count)
+{
+	if (!(s[i[2]] = malloc(sizeof(t_sprite *) * (count + 1))))
+		return (0);
+	s[i[2]]->x = (double)i[0] + 0.5;
+	s[i[2]]->y = (double)i[1] + 0.5;
+	i[2]++;
+	return (i[2]);
+}
+
 t_sprite		**init_spawn(char **map, t_spawn *sp, t_sprite **s)
 {
-	int i;
-	int j;
+	int i[3];
 	int count;
-	int k;
 
 	count = count_sprite(map);
 	if (!(s = malloc(sizeof(t_sprite **) * (count + 1))))
 		return (NULL);
-	i = 0;
-	k = 0;
-	while (map[i])
+	i[0] = 0;
+	i[2] = 0;
+	while (map[i[0]])
 	{
-		j = 0;
-		while (map[i][j])
+		i[1] = 0;
+		while (map[i[0]][i[1]])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' ||
-				map[i][j] == 'W')
-			{
-				set_dir(sp, map[i][j]);
-				sp->posy = (double)i + 0.5;
-				sp->posx = (double)j + 0.5;
-			}
-			else if (map[i][j] == '2')
-			{
-				if (!(s[k] = malloc(sizeof(t_sprite *) * (count + 1))))
-					return (NULL);
-				s[k]->x = (double)i + 0.5;
-				s[k]->y = (double)j + 0.5;
-				k++;
-			}
-			j++;
+			if (map[i[0]][i[1]] == 'N' || map[i[0]][i[1]] == 'S'
+				|| map[i[0]][i[1]] == 'E' || map[i[0]][i[1]] == 'W')
+				set_pos(map, sp, i);
+			else if (map[i[0]][i[1]] == '2')
+				i[2] = set_sprite(s, i, count);
+			i[1]++;
 		}
-		i++;
+		i[0]++;
 	}
-	s[k] = NULL;
+	s[i[2]] = NULL;
 	return (s);
 }

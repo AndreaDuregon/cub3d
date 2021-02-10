@@ -19,6 +19,7 @@ SRCS	=	cub3d.c \
 			check_file.c \
 			rendering.c \
 			define_dir.c \
+			spawn.c \
 			raycasting.c \
 			raycasting2.c \
 			raycasting3.c \

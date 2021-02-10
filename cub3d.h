@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 09:32:26 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 09:48:59 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,5 +194,6 @@ void				dda(t_spawn *sp, char **map);
 void				tex_coord(t_spawn *sp, t_var var);
 int					print_stripe(t_hook *h, int d, int y, int c);
 void				print_sprite(t_hook *h);
+void				set_dir(t_spawn *sp, char c);
 
 #endif
