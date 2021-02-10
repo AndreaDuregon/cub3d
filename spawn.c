@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 09:48:27 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 09:49:19 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 12:02:52 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		set_dir(t_spawn *sp, char c)
 {
 	sp->lr = 0;
 	sp->fb = 0;
+	sp->sm = 0;
 	sp->jump = 0;
 	sp->appo = 0;
 	sp->swjp = 0;

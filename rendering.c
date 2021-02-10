@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:57:41 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/09 19:11:43 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 16:52:20 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,12 @@ int			unset_key(int keycode, t_hook *h)
 		h->sp->lr = 0;
 	if (keycode == 13)
 		h->sp->fb = 0;
+	if (keycode == 1)
+		h->sp->fb = 0;
+	if (keycode == 0)
+		h->sp->sm = 0;
+	if (keycode == 2)
+		h->sp->sm = 0;
 	if (keycode == 257)
 	{
 		h->sp->jump = 0;
@@ -93,18 +99,33 @@ int			unset_key(int keycode, t_hook *h)
 
 int			set_key(int keycode, t_hook *h)
 {
+	if (keycode == 53)
+		exit(0);
 	if (keycode == 123)
 		h->sp->lr = 1;
 	if (keycode == 124)
 		h->sp->lr = -1;
 	if (keycode == 13)
 		h->sp->fb = 1;
+	if (keycode == 1)
+		h->sp->fb = -1;
+	if (keycode == 2)
+		h->sp->sm = 1;
+	if (keycode == 0)
+		h->sp->sm = -1;
 	if (keycode == 49)
 		h->sp->jump = 1;
 	if (keycode == 257)
 		h->sp->jump = -1;
 	if (keycode == 12)
 		h->sp->sprint = 1;
+	return (0);
+}
+
+int			check_mov(char c)
+{
+	if (c != '1' && c != '2')
+		return (1);
 	return (0);
 }
 
@@ -141,11 +162,36 @@ int			set_key_render(t_hook *h)
 	}
 	if (h->sp->fb == 1)
 	{
-		//printmap(h);
-		if (h->map[(int)(h->sp->posy + h->sp->diry * h->sp->movspeed)][(int)(h->sp->posx)] != '1')
+		printmap(h);
+		if (check_mov(h->map[(int)(h->sp->posy + h->sp->diry * h->sp->movspeed)][(int)(h->sp->posx)]))
 			h->sp->posy += h->sp->diry * h->sp->movspeed;
-		if (h->map[(int)(h->sp->posy)][(int)(h->sp->posx + h->sp->dirx * h->sp->movspeed)] != '1')
+		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx + h->sp->dirx * h->sp->movspeed)]))
 			h->sp->posx += h->sp->dirx * h->sp->movspeed;
+	}
+	if (h->sp->fb == -1)
+	{
+		printmap(h);
+		if (check_mov(h->map[(int)(h->sp->posy - h->sp->diry * h->sp->movspeed)][(int)(h->sp->posx)]))
+			h->sp->posy -= h->sp->diry * h->sp->movspeed;
+		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx - h->sp->dirx * h->sp->movspeed)]))
+			h->sp->posx -= h->sp->dirx * h->sp->movspeed;
+	}
+	if (h->sp->sm == 1)
+	{
+		printmap(h);
+		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx - h->sp->diry * h->sp->movspeed)]))
+			h->sp->posx -= h->sp->diry * h->sp->movspeed;
+		if (check_mov(h->map[(int)(h->sp->posy + h->sp->dirx * h->sp->movspeed)][(int)(h->sp->posx)]))
+			h->sp->posy += h->sp->dirx * h->sp->movspeed;
+	}
+		if (h->sp->sm == -1)
+	{
+		printmap(h);
+		printf("%f %f\n", h->sp->posx, h->sp->posy);
+		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx + h->sp->diry * h->sp->movspeed)]))
+			h->sp->posx += h->sp->diry * h->sp->movspeed;
+		if (check_mov(h->map[(int)(h->sp->posy - h->sp->dirx * h->sp->movspeed)][(int)(h->sp->posx)]))
+			h->sp->posy -= h->sp->dirx * h->sp->movspeed;
 	}
 	if (h->sp->jump == 1)
 	{

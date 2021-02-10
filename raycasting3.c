@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 18:53:49 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/09 19:00:53 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 15:43:34 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		print_wall(t_hook *h, int x)
 	if (h->map[h->sp->mapy][h->sp->mapx] == '1')
 	{
 		y = h->sp->drawstart;
-		while (y <= h->sp->drawend)
+		while (y < h->sp->drawend)
 		{
 			h->sp->texpos += h->sp->step;
 			if (h->sp->side == 0)

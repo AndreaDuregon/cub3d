@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 09:48:59 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 12:03:08 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct		s_spawn
 	int				drawend;
 	int				lr;
 	int				fb;
+	int				sm;
 	int				jump;
 	int				appo;
 	int				swjp;

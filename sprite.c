@@ -6,16 +6,16 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:22:32 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 09:32:34 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 17:14:18 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		sort_sprite(int *spr_ord, int *spr_dist)
+void		sort_sprite(int *spr_ord, double *spr_dist)
 {
 	int		i;
-	int		temp;
+	double		temp;
 
 	i = 0;
 	while (spr_dist[i])
@@ -35,10 +35,10 @@ void		sort_sprite(int *spr_ord, int *spr_dist)
 	}
 }
 
-void		sprite_var(t_hook *h, int i, int *spr_ord, int *spr_dist)
+void		sprite_var(t_hook *h, int i, int *spr_ord, double *spr_dist)
 {
-	h->spr->spritex = h->sprite[spr_ord[i]]->y - h->sp->posx;
-	h->spr->spritey = h->sprite[spr_ord[i]]->x - h->sp->posy;
+	h->spr->spritex = h->sprite[spr_ord[i]]->x - h->sp->posx;
+	h->spr->spritey = h->sprite[spr_ord[i]]->y - h->sp->posy;
 	h->spr->invcam = 1.0 / (h->sp->planex * h->sp->diry -
 							h->sp->dirx * h->sp->planey);
 	h->spr->transx = -h->spr->invcam * (h->sp->diry * h->spr->spritex
@@ -64,13 +64,14 @@ void		sprite_var(t_hook *h, int i, int *spr_ord, int *spr_dist)
 	h->spr->stripe = h->spr->sprdrawstartx;
 }
 
-int			fill_spr(int *spr_ord, int *spr_dist, int i, t_hook *h)
+int			fill_spr(int *spr_ord, double *spr_dist, int i, t_hook *h)
 {
 	spr_ord[i] = i;
-	spr_dist[i] = ((h->sp->posx - h->sprite[i]->x) *
-					(h->sp->posx - h->sprite[i]->x) +
-					(h->sp->posy - h->sprite[i]->y) *
-					(h->sp->posy - h->sprite[i]->y));
+	spr_dist[i] = ((h->sprite[i]->y - h->sp->posy) *
+					(h->sprite[i]->y - h->sp->posy) +
+					(h->sprite[i]->x - h->sp->posx) *
+					(h->sprite[i]->x - h->sp->posx));
+	printf("%f %f %f |%f %f|\n", spr_dist[i], h->sp->posx, h->sp->posy, h->sprite[i]->x, h->sprite[i]->y);
 	return (++i);
 }
 
@@ -79,14 +80,14 @@ void		sprite_calc(t_hook *h)
 	int i;
 	int count;
 	int *spr_ord;
-	int *spr_dist;
+	double *spr_dist;
 
 	i = 0;
 	while (h->sprite[i])
 		i++;
 	count = i;
 	if (!(spr_ord = malloc(sizeof(int) * (count + 1))) ||
-		!(spr_dist = malloc(sizeof(int) * (count + 1))))
+		!(spr_dist = malloc(sizeof(double) * (count + 1))))
 		return ;
 	i = 0;
 	while (i < count)

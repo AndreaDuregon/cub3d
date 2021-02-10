@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 17:20:27 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 10:13:27 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 17:13:40 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int				set_sprite(t_sprite **s, int i[3], int count)
 {
 	if (!(s[i[2]] = malloc(sizeof(t_sprite *) * (count + 1))))
 		return (0);
-	s[i[2]]->x = (double)i[0] + 0.5;
-	s[i[2]]->y = (double)i[1] + 0.5;
+	s[i[2]]->x = (double)i[1] + 0.5;
+	s[i[2]]->y = (double)i[0] + 0.5;
 	i[2]++;
 	return (i[2]);
 }

@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 11:18:39 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/09 19:06:32 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 15:37:30 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ void		var_dda(t_spawn *sp)
 
 void		dda(t_spawn *sp, char **map)
 {
+	sp->hit = 0;
 	while (sp->hit == 0)
 	{
-		if (sp->sidedistx < sp->sidedisty)
+		if (sp->sidedistx <= sp->sidedisty)
 		{
 			sp->sidedistx += sp->deltadistx;
 			sp->mapx += sp->stepx;
