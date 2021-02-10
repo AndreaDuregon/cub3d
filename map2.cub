@@ -1,8 +1,8 @@
 R 900 500
 NO ./texture/tron0.xpm
-SO ./texture/tron2.xpm
+SO ./texture/tron1.xpm
 WE ./texture/tron2.xpm
-EA ./texture/tron0.xpm
+EA ./texture/tron3.xpm
 S ./texture/enemy.xpm
 F 0,0,0
 C 0,0,0

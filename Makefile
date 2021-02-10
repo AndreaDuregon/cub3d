@@ -24,7 +24,8 @@ SRCS	=	cub3d.c \
 			raycasting3.c \
 			raycasting4.c \
 			init.c \
-			sprite.c
+			sprite.c \
+			sprite2.c
 
 OBJ		=	$(SRCS:.c=.o)
 
