@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 19:15:21 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/11 19:44:27 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ typedef	struct		s_sprite
 {
 	double			x;
 	double			y;
-	double 			movex;
-	double 			movey;
+	double			movex;
+	double			movey;
 	int				sw;
 	int				k;
 	t_scia			*scia;
@@ -146,18 +146,18 @@ typedef	struct		s_sprite
 
 typedef	struct		s_floceal
 {
-	float			rayDirX0;
-    float			rayDirY0;
-    float			rayDirX1;
-    float			rayDirY1;
-    int				p;
-    float			posZ;
-    float			rowDistance;
-    float			floorStepX;
-    float			floorStepY;
-    float			floorX;
-    float			floorY;
-    unsigned int	color;
+	float			raydirxa;
+	float			raydirya;
+	float			raydirxb;
+	float			raydiryb;
+	int				p;
+	float			posz;
+	float			rowdistance;
+	float			floorstepx;
+	float			floorstepy;
+	float			floorx;
+	float			floory;
+	unsigned int	color;
 }					t_floceal;
 
 typedef struct		s_hook
@@ -171,6 +171,7 @@ typedef struct		s_hook
 	t_vars			vars;
 	t_tex			*tex[5];
 	char			**minimap;
+	t_floceal		*floceal;
 }					t_hook;
 
 int					ar_length(char **map);
