@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 12:03:08 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 19:15:21 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct		s_spawn
 	int				lr;
 	int				fb;
 	int				sm;
+	int				sw;
 	int				jump;
 	int				appo;
 	int				swjp;
@@ -141,8 +142,11 @@ typedef struct		s_hook
 	t_data			img;
 	t_vars			vars;
 	t_tex			*tex[5];
+	char			**minimap;
 }					t_hook;
 
+int					ar_length(char **map);
+void				printmap(t_hook *h);
 void				var_parsing(int fd, t_var *var);
 char				**map_parsing(int fd);
 void				insert_value(char *temp, t_var *var);
@@ -172,7 +176,7 @@ void				forb_rule_err(char *line, char *reg);
 void				exist_file_err(void);
 void				name_file_err(char *str);
 void				invalid_map_err(char **map);
-void				rendering(char **map, t_var var);
+void				rendering(char **map, t_var var, int sw);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int					create_trgb(int t, int r, int g, int b);
 t_hook				hook_init(char **map, t_var var, t_spawn spawn,

@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:22:32 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 17:14:18 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 19:33:53 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int			fill_spr(int *spr_ord, double *spr_dist, int i, t_hook *h)
 					(h->sprite[i]->y - h->sp->posy) +
 					(h->sprite[i]->x - h->sp->posx) *
 					(h->sprite[i]->x - h->sp->posx));
-	printf("%f %f %f |%f %f|\n", spr_dist[i], h->sp->posx, h->sp->posy, h->sprite[i]->x, h->sprite[i]->y);
 	return (++i);
 }
 

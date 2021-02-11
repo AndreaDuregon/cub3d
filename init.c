@@ -6,11 +6,36 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 17:20:27 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 17:13:40 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 19:48:54 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int			ar_length(char **map)
+{
+	int i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
+}
+
+char			**minimap_init(char **minimap, char **map)
+{
+	int i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (!(minimap[i] = (char *)malloc((((int)ft_strlen(map[i]) + 1) * sizeof(char)))))
+			exit (0);
+		i++;
+	}
+	minimap[i] = 0;
+	return (minimap);
+}
 
 t_hook			hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt)
 {
@@ -27,6 +52,9 @@ t_hook			hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt
 	h.var = var;
 	h.sp = &spawn;
 	h.spr = &sprt;
+	if (!(h.minimap = malloc((ar_length(map) + 1) * sizeof(char *))))
+		exit(0);
+	h.minimap = minimap_init(h.minimap, h.map);
 	return (h);
 }
 

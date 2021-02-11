@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:57:41 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 16:52:20 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 18:31:01 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,6 @@ void		print_background(t_var var, t_data img)
 							var.f[1], var.f[2]));
 		x++;
 	}
-}
-
-void	printmap(t_hook *h)
-{
-	int i;
-	int k;
-
-	i = 0;
-	while (h->map[i])
-	{
-		k = 0;
-		while (h->map[i][k])
-		{
-			if (i != (int)h->sp->posy || k != (int)h->sp->posx)
-				printf("%c", h->map[i][k]);
-			else
-				printf("%c", ' ');
-			k++;
-		}
-		printf("\n");
-		i++;
-	}
-	printf("\n\n");
 }
 
 int			unset_key(int keycode, t_hook *h)
@@ -218,7 +195,7 @@ int			set_key_render(t_hook *h)
 	return (0);
 }
 
-void		rendering(char **map, t_var var)
+void		rendering(char **map, t_var var, int sw)
 {
 	t_vars		vars;
 	t_data		img;
@@ -229,6 +206,7 @@ void		rendering(char **map, t_var var)
 
 	s = NULL;
 	s = init_spawn(map, &sp, s);
+	sp.sw = sw;
 	if (!(sp.zbuff = malloc(sizeof(double) * (var.rx + 1))))
 		return ;
 	vars.mlx = mlx_init();

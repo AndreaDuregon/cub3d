@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 19:01:19 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 15:39:22 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 19:29:05 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@ void		call_func(t_hook *h, int x)
 	print_wall(h, x);
 	if (!h->sp->sprint)
 		set_speed(h->sp);
+}
+
+void		ft_save_img(char *img, t_hook *h)
+{
+	int i;
+	int fd;
+
+	i = 0;
+	fd = open("img.bmp", O_CREAT | O_WRONLY);
+	while (img[i])
+	{
+		if (i % h->var.rx == 0)
+			write(fd, &"\n", 1);
+		write(fd, &img[i], 1);
+		i++;
+	}
+	write(fd, 0, 1);
+	close(fd);
 }
 
 int			raycasting(t_hook *h)
@@ -42,6 +60,12 @@ int			raycasting(t_hook *h)
 	}
 	x = 0;
 	sprite_calc(h);
+	if (h->sp->sw == 1)
+	{
+		ft_save_img(h->img.img, h);	
+		h->sp->sw = 0;
+	}
+	printmap(h);
 	mlx_put_image_to_window(h->vars.mlx, h->vars.win, h->img.img, 0, 0);
 	if (!(mlx_destroy_image(h->vars.mlx, h->img.img)))
 		return (0);

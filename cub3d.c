@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:48:36 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/02 14:24:03 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/10 17:35:28 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,19 @@ int			main(int argc, char **argv)
 	int		fd;
 	t_var	var;
 	char	**map;
+	int		sw;
 
+	sw = 0;
 	if (argc < 2)
 		exist_file_err();
+	if (argc == 3 && ft_strnstr(argv[2], "--save", 6))
+		sw = 1;
 	name_file_err(argv[1]);
 	var = var_init();
 	fd = open(argv[1], O_RDONLY);
 	var_parsing(fd, &var);
 	map = map_parsing(fd);
-	rendering(map, var);
+	rendering(map, var, sw);
 	close(fd);
 	return (0);
 }
