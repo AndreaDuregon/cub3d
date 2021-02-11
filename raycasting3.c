@@ -14,38 +14,42 @@
 
 void		side_zero(t_hook *h, int x, int y, int color)
 {
-	h->sp->texy = (int)h->sp->texpos & (h->tex[0]->height - 1);
-	color = ((h->tex)[0])->buff[(int)(h->tex[0]->height *
-								h->sp->texy + h->sp->texx)];
-	draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[0],
-		h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+	if ((y + h->sp->appo) < h->var.ry && (y + h->sp->appo) > 0)
+	{
+		h->sp->texy = (int)h->sp->texpos & (h->tex[0]->height - 1);
+		draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[0],
+			h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+	}
 }
 
 void		side_one(t_hook *h, int x, int y, int color)
 {
-	h->sp->texy = (int)h->sp->texpos & (h->tex[1]->height - 1);
-	color = ((h->tex)[1])->buff[(int)(h->tex[1]->height *
-								h->sp->texy + h->sp->texx)];
-	draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[1],
+	if ((y + h->sp->appo) < h->var.ry && (y + h->sp->appo) > 0)
+	{
+		h->sp->texy = (int)h->sp->texpos & (h->tex[1]->height - 1);
+		draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[1],
 			h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+	}
 }
 
 void		side_two(t_hook *h, int x, int y, int color)
 {
-	h->sp->texy = (int)h->sp->texpos & (h->tex[3]->height - 1);
-	color = ((h->tex)[3])->buff[(int)(h->tex[3]->height *
-								h->sp->texy + h->sp->texx)];
-	draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[3],
-		h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+	if ((y + h->sp->appo) < h->var.ry && (y + h->sp->appo) > 0)
+	{
+		h->sp->texy = (int)h->sp->texpos & (h->tex[3]->height - 1);
+		draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[3],
+			h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+	}
 }
 
 void		side_three(t_hook *h, int x, int y, int color)
 {
-	h->sp->texy = (int)h->sp->texpos & (h->tex[2]->height - 1);
-	color = ((h->tex)[2])->buff[(int)(h->tex[2]->height *
-								h->sp->texy + h->sp->texx)];
-	draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[2],
-		h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+	if ((y + h->sp->appo) < h->var.ry && (y + h->sp->appo) > 0)
+	{
+		h->sp->texy = (int)h->sp->texpos & (h->tex[2]->height - 1);
+		draw_dot(h, x, y + h->sp->appo, getcolor(h->tex[2],
+			h->sp->texx, h->sp->texy, h->sp->perpwalldist));
+	}
 }
 
 void		print_wall(t_hook *h, int x)

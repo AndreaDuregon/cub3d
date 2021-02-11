@@ -71,6 +71,8 @@ int			unset_key(int keycode, t_hook *h)
 	}
 	if (keycode == 12)
 		h->sp->sprint = 0;
+	if (keycode ==  14)
+		h->sp->displayminimap = 0;
 	return (0);
 }
 
@@ -96,6 +98,8 @@ int			set_key(int keycode, t_hook *h)
 		h->sp->jump = -1;
 	if (keycode == 12)
 		h->sp->sprint = 1;
+	if (keycode ==  14)
+		h->sp->displayminimap = 1;
 	return (0);
 }
 
@@ -139,7 +143,6 @@ int			set_key_render(t_hook *h)
 	}
 	if (h->sp->fb == 1)
 	{
-		printmap(h);
 		if (check_mov(h->map[(int)(h->sp->posy + h->sp->diry * h->sp->movspeed)][(int)(h->sp->posx)]))
 			h->sp->posy += h->sp->diry * h->sp->movspeed;
 		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx + h->sp->dirx * h->sp->movspeed)]))
@@ -147,7 +150,6 @@ int			set_key_render(t_hook *h)
 	}
 	if (h->sp->fb == -1)
 	{
-		printmap(h);
 		if (check_mov(h->map[(int)(h->sp->posy - h->sp->diry * h->sp->movspeed)][(int)(h->sp->posx)]))
 			h->sp->posy -= h->sp->diry * h->sp->movspeed;
 		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx - h->sp->dirx * h->sp->movspeed)]))
@@ -155,7 +157,6 @@ int			set_key_render(t_hook *h)
 	}
 	if (h->sp->sm == 1)
 	{
-		printmap(h);
 		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx - h->sp->diry * h->sp->movspeed)]))
 			h->sp->posx -= h->sp->diry * h->sp->movspeed;
 		if (check_mov(h->map[(int)(h->sp->posy + h->sp->dirx * h->sp->movspeed)][(int)(h->sp->posx)]))
@@ -163,8 +164,6 @@ int			set_key_render(t_hook *h)
 	}
 		if (h->sp->sm == -1)
 	{
-		printmap(h);
-		printf("%f %f\n", h->sp->posx, h->sp->posy);
 		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx + h->sp->diry * h->sp->movspeed)]))
 			h->sp->posx += h->sp->diry * h->sp->movspeed;
 		if (check_mov(h->map[(int)(h->sp->posy - h->sp->dirx * h->sp->movspeed)][(int)(h->sp->posx)]))

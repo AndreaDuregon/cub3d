@@ -94,6 +94,7 @@ typedef struct		s_spawn
 	int				appo;
 	int				swjp;
 	int				sprint;
+	int				displayminimap;
 	int				hit_sprite;
 	double			movspeed;
 	double			rotspeed;
@@ -126,11 +127,38 @@ typedef struct		s_tex
 	char			*buff;
 }					t_tex;
 
+typedef	struct		s_scia
+{
+	int				x;
+	int				y;
+}					t_scia;
+
 typedef	struct		s_sprite
 {
 	double			x;
 	double			y;
+	double 			movex;
+	double 			movey;
+	int				sw;
+	int				k;
+	t_scia			*scia;
 }					t_sprite;
+
+typedef	struct		s_floceal
+{
+	float			rayDirX0;
+    float			rayDirY0;
+    float			rayDirX1;
+    float			rayDirY1;
+    int				p;
+    float			posZ;
+    float			rowDistance;
+    float			floorStepX;
+    float			floorStepY;
+    float			floorX;
+    float			floorY;
+    unsigned int	color;
+}					t_floceal;
 
 typedef struct		s_hook
 {
@@ -200,5 +228,7 @@ void				tex_coord(t_spawn *sp, t_var var);
 int					print_stripe(t_hook *h, int d, int y, int c);
 void				print_sprite(t_hook *h);
 void				set_dir(t_spawn *sp, char c);
+void				movement_sprite(t_hook *h);
+void				screenshot(t_data img, t_var var);
 
 #endif

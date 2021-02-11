@@ -27,7 +27,9 @@ SRCS	=	cub3d.c \
 			init.c \
 			sprite.c \
 			sprite2.c \
-			print_map.c
+			print_map.c \
+			sprite_mov.c \
+			screenshot.c
 
 OBJ		=	$(SRCS:.c=.o)
 

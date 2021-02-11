@@ -47,7 +47,6 @@ int			raycasting(t_hook *h)
 {
 	int x;
 
-	x = 0;
 	h->img.img = mlx_new_image(h->vars.mlx, h->var.rx, h->var.ry);
 	h->img.addr = mlx_get_data_addr(h->img.img, &h->img.bits_per_pixel,
 									&h->img.line_length, &h->img.endian);
@@ -58,14 +57,15 @@ int			raycasting(t_hook *h)
 		call_func(h, x);
 		x++;
 	}
-	x = 0;
+	movement_sprite(h);
 	sprite_calc(h);
 	if (h->sp->sw == 1)
 	{
-		ft_save_img(h->img.img, h);	
+		screenshot(h->img, h->var);	
 		h->sp->sw = 0;
 	}
-	printmap(h);
+	if (h->sp->displayminimap)
+		printmap(h);
 	mlx_put_image_to_window(h->vars.mlx, h->vars.win, h->img.img, 0, 0);
 	if (!(mlx_destroy_image(h->vars.mlx, h->img.img)))
 		return (0);

@@ -55,6 +55,7 @@ t_hook			hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt
 	if (!(h.minimap = malloc((ar_length(map) + 1) * sizeof(char *))))
 		exit(0);
 	h.minimap = minimap_init(h.minimap, h.map);
+	h.sp->displayminimap = 0;
 	return (h);
 }
 
@@ -87,12 +88,34 @@ void			set_pos(char **map, t_spawn *sp, int i[3])
 	sp->posx = (double)i[1] + 0.5;
 }
 
+t_scia			*init_scia(t_scia *scia)
+{
+	int i;
+
+	i = 0;
+	while (i < 30)
+	{
+		scia[i].x = -1;
+		scia[i].y = -1;
+		i++;
+	}
+	return (scia);
+}
+
 int				set_sprite(t_sprite **s, int i[3], int count)
 {
 	if (!(s[i[2]] = malloc(sizeof(t_sprite *) * (count + 1))))
 		return (0);
 	s[i[2]]->x = (double)i[1] + 0.5;
 	s[i[2]]->y = (double)i[0] + 0.5;
+	s[i[2]]->movex = 0.07;
+	s[i[2]]->movey = 0.07;
+	s[i[2]]->sw = 0;
+	if (!(s[i[2]]->scia = (t_scia *)malloc(sizeof(t_scia) * 31)))
+		return (0);
+	s[i[2]]->scia = init_scia(s[i[2]]->scia);
+	//s[i[2]]->scia[30] = 0;
+	s[i[2]]->k = 0;
 	i[2]++;
 	return (i[2]);
 }

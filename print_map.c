@@ -19,10 +19,10 @@ int		max_line(t_hook *h)
 
 	max = 0;
 	i = 0;
-	while (h->minimap[i])
+	while (h->map[i])
 	{
-		if ((int)ft_strlen(h->minimap[i]) > max)
-			max = (int)ft_strlen(h->minimap[i]);
+		if ((int)ft_strlen(h->map[i]) > max)
+			max = (int)ft_strlen(h->map[i]);
 		i++;
 	}
 	return (max);
@@ -30,37 +30,43 @@ int		max_line(t_hook *h)
 
 void	color_calc(t_hook *h, int x[2], int y[2])
 {
-	if (h->minimap[x[1]][y[1]] == '1')
+	if (h->map[x[1]][y[1]] == '0' || h->map[x[1]][y[1]] == 'N' || h->map[x[1]][y[1]] == 'W' ||
+		h->map[x[1]][y[1]] == 'E' || h->map[x[1]][y[1]] == 'S')
+		my_mlx_pixel_put(&h->img, y[0], x[0], create_trgb(200, 64,
+							64, 64));
+	else if (h->map[x[1]][y[1]] == '2')
 		my_mlx_pixel_put(&h->img, y[0], x[0], create_trgb(0, 255,
-							0, 0));
-	else
+							102, 255));
+	if (y[1] == (int)h->sp->posx && x[1] == (int)h->sp->posy)
 		my_mlx_pixel_put(&h->img, y[0], x[0], create_trgb(0, 0,
-							0, 0));
+							255, 255));
 }
 
 void	put_img_minimap(t_hook *h)
 {
 	int x[2];
 	int y[2];
-	int sizex;
-	int sizey;
+	int sizex[2];
+	int sizey[2];
 
 	x[0] = 0;
 	x[1] = 0;
-	sizex = (h->var.ry / 6) / max_line(h);
-	sizey = (h->var.rx / 6) / ar_length(h->map);
-	while (x[0] < (h->var.rx / 6))
+	sizex[0] = 4;
+	sizey[0] = 4;
+	sizex[1] = (sizex[0] * ar_length(h->map));
+	sizey[1] = sizey[0] * (max_line(h) / 2);
+	while (x[0] < sizex[1])
 	{
-		y[0] = h->var.ry - 1;
+		y[0] = ((h->var.rx / 2) - sizey[1]);
 		y[1] = 0;
-		while (y[0] > (h->var.ry / 6))
+		while (y[0] < ((h->var.rx / 2) + sizey[1]))
 		{
-			if ((y[0] % sizey) == 0 && h->minimap[x[1]][y[1] + 1])
+			if ((y[0] % sizey[0]) == 0 && h->map[x[1]][y[1] + 1])
 				y[1]++;
 			color_calc(h, x, y);
-			y[0]--;
+			y[0]++;
 		}
-		if ((x[0] % sizey) == 0 && h->minimap[x[1] + 1])
+		if ((x[0] % sizey[0]) == 0 && h->map[x[1] + 1])
 			x[1]++;
 		x[0]++;
 	}
@@ -68,23 +74,5 @@ void	put_img_minimap(t_hook *h)
 
 void	printmap(t_hook *h)
 {
-	int i;
-	int k;
-
-	i = 0;
-	while (h->map[i])
-	{
-		k = 0;
-		while (h->map[i][k])
-		{
-			if (i != (int)h->sp->posy || k != (int)h->sp->posx)
-				h->minimap[i][k] = h->map[i][k];
-			else
-				h->minimap[i][k] = 'X';
-			k++;
-		}
-		h->minimap[i][k] = 0;
-		i++;
-	}
 	put_img_minimap(h);
 }
