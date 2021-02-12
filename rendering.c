@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:57:41 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 18:31:01 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/12 15:03:02 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,6 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color)
 int		create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-void		print_background(t_var var, t_data img)
-{
-	int x;
-	int y;
-
-	x = 0;
-	while (x < var.rx)
-	{
-		y = 0;
-		while (y < var.ry / 2)
-			my_mlx_pixel_put(&img, x, y++, create_trgb(0, var.c[0],
-							var.c[1], var.c[2]));
-		x++;
-	}
-	x = 0;
-	while (x < var.rx)
-	{
-		y = var.ry / 2;
-		while (y < var.ry)
-			my_mlx_pixel_put(&img, x, y++, create_trgb(0, var.f[0],
-							var.f[1], var.f[2]));
-		x++;
-	}
 }
 
 int			unset_key(int keycode, t_hook *h)
@@ -213,7 +188,6 @@ void		rendering(char **map, t_var var, int sw)
 	img.img = mlx_new_image(vars.mlx, var.rx, var.ry);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	print_background(var, img);
 	h = hook_init(map, var, sp, vars, sprt);
 	h.sprite = s;
 	h.img = img;

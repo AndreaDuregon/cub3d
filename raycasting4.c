@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 19:01:19 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 19:29:05 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/12 15:00:46 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			raycasting(t_hook *h)
 	h->img.img = mlx_new_image(h->vars.mlx, h->var.rx, h->var.ry);
 	h->img.addr = mlx_get_data_addr(h->img.img, &h->img.bits_per_pixel,
 									&h->img.line_length, &h->img.endian);
-	print_background(h->var, h->img);
+	print_floor(h);
 	x = 0;
 	while (x < h->var.rx)
 	{
@@ -61,7 +61,7 @@ int			raycasting(t_hook *h)
 	sprite_calc(h);
 	if (h->sp->sw == 1)
 	{
-		screenshot(h->img, h->var);	
+		screenshot(h->img, h->var);
 		h->sp->sw = 0;
 	}
 	if (h->sp->displayminimap)

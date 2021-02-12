@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/11 19:44:27 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/12 17:14:48 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,9 @@ typedef	struct		s_floceal
 	float			floorx;
 	float			floory;
 	unsigned int	color;
+	int				cbpatt;
+	int				floortex;
+	int				ceiltex;
 }					t_floceal;
 
 typedef struct		s_hook
@@ -169,7 +172,7 @@ typedef struct		s_hook
 	char			**map;
 	t_data			img;
 	t_vars			vars;
-	t_tex			*tex[5];
+	t_tex			*tex[10];
 	char			**minimap;
 	t_floceal		*floceal;
 }					t_hook;
@@ -216,7 +219,6 @@ int					raycasting(t_hook *h);
 void				draw_dot(t_hook *h, int x, int y, int color);
 int					getcolor(t_tex *tex, int x, int y, int fade);
 int					key_hook(int keycode);
-void				print_background(t_var var, t_data img);
 void				sprite_calc(t_hook *h);
 void				pwd_calc(t_spawn *sp);
 void				height_calc(t_spawn *sp, t_var var);
@@ -231,5 +233,6 @@ void				print_sprite(t_hook *h);
 void				set_dir(t_spawn *sp, char c);
 void				movement_sprite(t_hook *h);
 void				screenshot(t_data img, t_var var);
+void				print_floor(t_hook *h);
 
 #endif

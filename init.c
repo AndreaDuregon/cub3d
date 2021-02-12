@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 17:20:27 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 19:48:54 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/12 18:05:37 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char			**minimap_init(char **minimap, char **map)
 	while (map[i])
 	{
 		if (!(minimap[i] = (char *)malloc((((int)ft_strlen(map[i]) + 1) * sizeof(char)))))
-			exit (0);
+			exit(0);
 		i++;
 	}
 	minimap[i] = 0;
@@ -39,15 +39,18 @@ char			**minimap_init(char **minimap, char **map)
 
 t_hook			hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt)
 {
-	t_hook	h;
-	int		width;
-	int		height;
+	t_hook		h;
+	int			width;
+	int			height;
+	t_floceal	flcl;
 
 	h.tex[0] = mlx_xpm_file_to_image(vars.mlx, var.no, &width, &height);
 	h.tex[1] = mlx_xpm_file_to_image(vars.mlx, var.so, &width, &height);
 	h.tex[2] = mlx_xpm_file_to_image(vars.mlx, var.ea, &width, &height);
 	h.tex[3] = mlx_xpm_file_to_image(vars.mlx, var.we, &width, &height);
 	h.tex[4] = mlx_xpm_file_to_image(vars.mlx, var.s, &width, &height);
+	h.tex[5] = mlx_xpm_file_to_image(vars.mlx, var.s, &width, &height);
+	h.floceal = &flcl;
 	h.map = map;
 	h.var = var;
 	h.sp = &spawn;
@@ -104,7 +107,7 @@ t_scia			*init_scia(t_scia *scia)
 
 int				set_sprite(t_sprite **s, int i[3], int count)
 {
-	if (!(s[i[2]] = malloc(sizeof(t_sprite *) * (count + 1))))
+	if (!(s[i[2]] = malloc(sizeof(t_sprite) * (count + 1))))
 		return (0);
 	s[i[2]]->x = (double)i[1] + 0.5;
 	s[i[2]]->y = (double)i[0] + 0.5;
@@ -126,7 +129,7 @@ t_sprite		**init_spawn(char **map, t_spawn *sp, t_sprite **s)
 	int count;
 
 	count = count_sprite(map);
-	if (!(s = malloc(sizeof(t_sprite **) * (count + 1))))
+	if (!(s = malloc(sizeof(t_sprite *) * (count + 1))))
 		return (NULL);
 	i[0] = 0;
 	i[2] = 0;
