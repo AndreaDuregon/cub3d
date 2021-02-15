@@ -59,6 +59,18 @@ void		random_gen(double *movex, double *movey)
 	}
 }
 
+void	follow_player(t_hook *h, double *movex, double *movey, int i)
+{
+	if ((int)h->sprite[i]->y < (int)h->sp->posy)
+		*movey *= -(h->sprite[i]->y - h->sp->posy);
+	else
+		*movey *= -(h->sprite[i]->y - h->sp->posy);
+	if ((int)h->sprite[i]->x < (int)h->sp->posx)
+		*movex *= -(h->sprite[i]->x - h->sp->posx);
+	else
+		*movex *= -(h->sprite[i]->x - h->sp->posx);
+}
+
 int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
 {
 	double sicx;
@@ -107,27 +119,19 @@ void	movement_sprite(t_hook *h)
 	i = 0;
 	while (h->sprite[i])
 	{
-		if (h->sprite[i]->sw == 0)
-		{
-			h->sprite[i]->movex = 0.07;
-			h->sprite[i]->movey = 0.07;
-			random_gen(&h->sprite[i]->movex, &h->sprite[i]->movey);
-			h->sprite[i]->sw = 1;
-		}
+		h->sprite[i]->movex = 0.009;
+		h->sprite[i]->movey = 0.009;
+		//random_gen(&h->sprite[i]->movex, &h->sprite[i]->movey);
+		follow_player(h, &h->sprite[i]->movex, &h->sprite[i]->movey, i);
 		if (can_move(h->sprite[i], h, h->sprite[i]->movex, h->sprite[i]->movey))
 		{
-			//h->map[(int)h->sprite[i]->y][(int)h->sprite[i]->x] = '0';
-			if (((int)(h->sprite[i]->x + h->sprite[i]->movex) != (int)h->sprite[i]->x || 
-				(int)(h->sprite[i]->y + h->sprite[i]->movey) != (int)h->sprite[i]->y))
-				gest_scie(h, i);
+			h->map[(int)h->sprite[i]->y][(int)h->sprite[i]->x] = '0';
+			//if (((int)(h->sprite[i]->x + h->sprite[i]->movex) != (int)h->sprite[i]->x || 
+			//	(int)(h->sprite[i]->y + h->sprite[i]->movey) != (int)h->sprite[i]->y))
+			//	gest_scie(h, i);
 			h->sprite[i]->x += h->sprite[i]->movex;
 			h->sprite[i]->y += h->sprite[i]->movey;
 			h->map[(int)h->sprite[i]->y][(int)h->sprite[i]->x] = '2';
-		}
-		else
-		{
-			h->sprite[i]->sw = 0;
-			//printf("%f %f %f %f\n", h->sprite[i]->x, h->sprite[i]->y, h->sprite[i]->movex, h->sprite[i]->movey );
 		}
 		i++;
 	}

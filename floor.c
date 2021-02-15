@@ -21,7 +21,7 @@ void		print_background(t_hook *h, t_var var, t_data img, unsigned int **buffer)
 	while (x < var.rx)
 	{
 		y = 0;
-		while (y < (var.ry/2))
+		while (y < var.ry)
 		{
 			draw_dot(h, x, y, buffer[y][x]);
 			y++;
@@ -54,8 +54,10 @@ void		ft_helper(t_hook *h, int y, unsigned int **buffer, int x)
 		h->floceal->color = h->tex[0]->buff[64 * ty + tx];
 		//buffer[h->var.ry - y - 1][x] = h->floceal->color;
 		//h->sp->texy = (int)h->sp->texpos & (h->tex[4]->height - 1);
-		if (buffer[y][x] == 0)
-			buffer[y][x] = getcolor(h->tex[4], tx, ty, 1000);
+		if ((y + h->sp->appo) < (h->var.ry) && (y + h->sp->appo) >= (0))
+			buffer[y + h->sp->appo][x] = getcolor(h->tex[5], tx, ty, 64);
+		if ((h->var.ry + h->sp->appo - y - 1) < (h->var.ry) && (h->var.ry + h->sp->appo - y - 1) >= (0))
+			buffer[h->var.ry + h->sp->appo - y - 1][x] = getcolor(h->tex[6], tx, ty, 64);
 		x++;
 	}
 }
@@ -79,24 +81,28 @@ unsigned int		**buff_alloc(int x, int y)
 void		print_floor(t_hook *h)
 {
 	int				y;
+	int				end;
 	unsigned int	**buffer;
 
 	buffer = buff_alloc(h->var.rx, h->var.ry);
 	y = 0;
-	while (y < h->var.ry)
+	end = h->var.ry;
+	if (h->sp->appo > 0)
+		end = h->var.ry + h->sp->appo;
+	while (y < end)
 	{
-		h->floceal->raydirya = h->sp->dirx - h->sp->planex;
-		h->floceal->raydirxa = h->sp->diry - h->sp->planey;
-		h->floceal->raydiryb = h->sp->dirx + h->sp->planex;
-		h->floceal->raydirxb = h->sp->diry + h->sp->planey;
+		h->floceal->raydirya = - h->sp->diry - h->sp->planey;
+		h->floceal->raydirxa = - h->sp->dirx - h->sp->planex;
+		h->floceal->raydiryb = - h->sp->diry + h->sp->planey;
+		h->floceal->raydirxb = - h->sp->dirx + h->sp->planex;
 		h->floceal->p = y - h->var.ry / 2;
 		h->floceal->posz = 0.5 * h->var.ry;
-		h->floceal->rowdistance = h->floceal->posz / h->floceal->p;
+		h->floceal->rowdistance = - h->floceal->posz / h->floceal->p;
 		h->floceal->floorstepx = h->floceal->rowdistance *
 				(h->floceal->raydirxb - h->floceal->raydirxa) /
-													h->var.ry;
+													h->var.rx;
 		h->floceal->floorstepy = h->floceal->rowdistance *
-			(h->floceal->raydiryb - h->floceal->raydirya) / h->var.ry;
+			(h->floceal->raydiryb - h->floceal->raydirya) / h->var.rx;
 		h->floceal->floorx = h->sp->posx + h->floceal->rowdistance *
 												h->floceal->raydirxa;
 		h->floceal->floory = h->sp->posy + h->floceal->rowdistance *
