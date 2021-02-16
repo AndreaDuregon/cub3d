@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 17:20:27 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/12 18:05:37 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/16 14:45:43 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_hook			hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt
 	h.tex[4] = mlx_xpm_file_to_image(vars.mlx, var.s, &width, &height);
 	h.tex[5] = mlx_xpm_file_to_image(vars.mlx, "./texture/quarzo.xpm", &width, &height);
 	h.tex[6] = mlx_xpm_file_to_image(vars.mlx, "./texture/WALL1.xpm", &width, &height);
+	h.tex[7] = mlx_xpm_file_to_image(vars.mlx, "./texture/gun.xpm", &width, &height);
 	h.floceal = &flcl;
 	h.map = map;
 	h.var = var;

@@ -32,6 +32,7 @@ SRCS	=	cub3d.c \
 			screenshot.c \
 			floor.c \
 			gun.c \
+			gunprinter.c
 
 OBJ		=	$(SRCS:.c=.o)
 
