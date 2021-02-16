@@ -85,10 +85,8 @@ void		slitta_array(t_hook *h, int i)
 	{
 		h->sprite[k] = h->sprite[j];
 		k++;
-		printf("00\n");
 		if (h->sprite[j])
 			j++;
-		printf("99\n");
 	}
 }
 

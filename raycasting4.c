@@ -71,7 +71,10 @@ int			raycasting(t_hook *h)
 	if (h->sp->displayminimap)
 		printmap(h);
 	if (h->sp->life <= 0)
+	{
+		printf("gameover\n");
 		exit(0);
+	}
 	mlx_put_image_to_window(h->vars.mlx, h->vars.win, h->img.img, 0, 0);
 	if (!(mlx_destroy_image(h->vars.mlx, h->img.img)))
 		return (0);

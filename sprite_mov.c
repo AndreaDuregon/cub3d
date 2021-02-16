@@ -97,18 +97,13 @@ int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
 		h->sp->life -= 1;
 	if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)] != '1' && 
 		h->map[(int)(spr->y + movey)][(int)(spr->x + movex)] != '1')
+	{
+		if ((int)(spr->y + movey) == (int)h->sp->posy && (int)(spr->x + movex) == (int)h->sp->posx)
+			return (0);
 		return (1);
+	}
 	else
 		return (0);
-	if (((int)h->sp->posx == (int)(spr->x + movex + sicx) &&
-		(int)(spr->y + movey + sicy) == (int) h->sp->posy))
-		return (0);
-	else if ((int)(spr->y + movey + sicy) == (int) h->sp->posy &&
-		(int)h->sp->posx != (int)(spr->x + movex + sicx))
-		return (1);
-	else if (((int)h->sp->posx != (int)(spr->x + movex + sicx) &&
-		(int)(spr->y + movey + sicy) != (int) h->sp->posy))
-		return (1);
 	return (0);
 }
 
@@ -117,7 +112,6 @@ void	movement_sprite(t_hook *h)
 	int i;
 
 	i = 0;
-	printf("life %d\n", h->sp->life);
 	while (h->sprite[i])
 	{
 		//if ((rand() % 80) <= 55)

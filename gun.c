@@ -95,7 +95,6 @@ void		shoot(t_hook *h)
 		if ((i = search_sprite(h, x, y)) == -1)
 			return ;
 		h->sprite[i]->life -=  50;
-		printf("life %d\n", h->sprite[i]->life);
 		if (h->sprite[i]->life <= 0)
 		{
 			h->sprite[i]->k = 0;
