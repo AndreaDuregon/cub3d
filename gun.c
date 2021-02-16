@@ -58,6 +58,12 @@ int		dda_gun(t_spawn *sp, char **map, int *x, int *y)
 			*y = sp->mapy;
 			return (1);
 		}
+		if (map[(int)sp->posy][(int)sp->posx] == '2')
+		{
+			*x = sp->mapx;
+			*y = sp->mapy;
+			return (1);
+		}
 		if (map[sp->mapy][sp->mapx] == '1')
 			return (0);
 	}
@@ -96,5 +102,4 @@ void		shoot(t_hook *h)
 			h->map[(int)h->sprite[i]->y][(int)h->sprite[i]->x] = '0';
 		}
 	}
-	h->sp->shoot = 0;
 }

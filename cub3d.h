@@ -167,7 +167,7 @@ typedef struct		s_hook
 	char			**map;
 	t_data			img;
 	t_vars			vars;
-	t_tex			*tex[10];
+	t_tex			*tex[15];
 	char			**minimap;
 	t_floceal		*floceal;
 }					t_hook;

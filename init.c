@@ -49,9 +49,10 @@ t_hook			hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt
 	h.tex[2] = mlx_xpm_file_to_image(vars.mlx, var.ea, &width, &height);
 	h.tex[3] = mlx_xpm_file_to_image(vars.mlx, var.we, &width, &height);
 	h.tex[4] = mlx_xpm_file_to_image(vars.mlx, var.s, &width, &height);
-	h.tex[5] = mlx_xpm_file_to_image(vars.mlx, "./texture/quarzo.xpm", &width, &height);
+	h.tex[5] = mlx_xpm_file_to_image(vars.mlx, "./texture/WALL1.xpm", &width, &height);
 	h.tex[6] = mlx_xpm_file_to_image(vars.mlx, "./texture/WALL1.xpm", &width, &height);
 	h.tex[7] = mlx_xpm_file_to_image(vars.mlx, "./texture/gun.xpm", &width, &height);
+	h.tex[8] = mlx_xpm_file_to_image(vars.mlx, "./texture/gun_shoot.xpm", &width, &height);
 	h.floceal = &flcl;
 	h.map = map;
 	h.var = var;
@@ -99,8 +100,8 @@ int				set_sprite(t_sprite **s, int i[3], int count)
 		return (0);
 	s[i[2]]->x = (double)i[1] + 0.5;
 	s[i[2]]->y = (double)i[0] + 0.5;
-	s[i[2]]->movex = 0.07;
-	s[i[2]]->movey = 0.07;
+	s[i[2]]->movex = 0;
+	s[i[2]]->movey = 0;
 	s[i[2]]->life = 100;
 	s[i[2]]->k = 1;
 	i[2]++;

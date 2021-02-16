@@ -64,13 +64,14 @@ int			raycasting(t_hook *h)
 		screenshot(h->img, h->var);
 		h->sp->sw = 0;
 	}
+	gunprinter(h);
 	if (h->sp->shoot)
 		shoot(h);
+	h->sp->shoot = 0;
 	if (h->sp->displayminimap)
 		printmap(h);
-	if (!h->sp->life)
+	if (h->sp->life <= 0)
 		exit(0);
-	gunprinter(h);
 	mlx_put_image_to_window(h->vars.mlx, h->vars.win, h->img.img, 0, 0);
 	if (!(mlx_destroy_image(h->vars.mlx, h->img.img)))
 		return (0);
