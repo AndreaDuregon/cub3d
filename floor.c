@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:15:28 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/12 17:48:30 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/16 11:27:41 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ void		ft_helper(t_hook *h, int y, unsigned int **buffer, int x)
 			h->floceal->floortex = 4;
 		h->floceal->ceiltex = 6;
 		h->floceal->color = h->tex[0]->buff[64 * ty + tx];
-		//buffer[y][x] = h->floceal->color;
 		h->floceal->color = h->tex[0]->buff[64 * ty + tx];
-		//buffer[h->var.ry - y - 1][x] = h->floceal->color;
-		//h->sp->texy = (int)h->sp->texpos & (h->tex[4]->height - 1);
 		if ((y + h->sp->appo) < (h->var.ry) && (y + h->sp->appo) >= (0))
 			buffer[y + h->sp->appo][x] = getcolor(h->tex[5], tx, ty, 64);
 		if ((h->var.ry + h->sp->appo - y - 1) < (h->var.ry) && (h->var.ry + h->sp->appo - y - 1) >= (0))
@@ -78,6 +75,8 @@ unsigned int		**buff_alloc(int x, int y)
 	return (buff);
 }
 
+static void 
+
 void		print_floor(t_hook *h)
 {
 	int				y;
@@ -86,18 +85,16 @@ void		print_floor(t_hook *h)
 
 	buffer = buff_alloc(h->var.rx, h->var.ry);
 	y = 0;
-	end = h->var.ry;
-	if (h->sp->appo > 0)
-		end = h->var.ry + h->sp->appo;
+	end = (h->sp->appo >= 0) ? h->var.ry + h->sp->appo : h->var.ry + h->sp->appo * -2;
 	while (y < end)
 	{
-		h->floceal->raydirya = - h->sp->diry - h->sp->planey;
-		h->floceal->raydirxa = - h->sp->dirx - h->sp->planex;
-		h->floceal->raydiryb = - h->sp->diry + h->sp->planey;
-		h->floceal->raydirxb = - h->sp->dirx + h->sp->planex;
+		h->floceal->raydirya = -h->sp->diry - h->sp->planey;
+		h->floceal->raydirxa = -h->sp->dirx - h->sp->planex;
+		h->floceal->raydiryb = -h->sp->diry + h->sp->planey;
+		h->floceal->raydirxb = -h->sp->dirx + h->sp->planex;
 		h->floceal->p = y - h->var.ry / 2;
 		h->floceal->posz = 0.5 * h->var.ry;
-		h->floceal->rowdistance = - h->floceal->posz / h->floceal->p;
+		h->floceal->rowdistance = -h->floceal->posz / h->floceal->p;
 		h->floceal->floorstepx = h->floceal->rowdistance *
 				(h->floceal->raydirxb - h->floceal->raydirxa) /
 													h->var.rx;
