@@ -68,6 +68,8 @@ int			raycasting(t_hook *h)
 		shoot(h);
 	if (h->sp->displayminimap)
 		printmap(h);
+	if (!h->sp->life)
+		exit(0);
 	gunprinter(h);
 	mlx_put_image_to_window(h->vars.mlx, h->vars.win, h->img.img, 0, 0);
 	if (!(mlx_destroy_image(h->vars.mlx, h->img.img)))

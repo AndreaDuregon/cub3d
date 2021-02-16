@@ -99,7 +99,7 @@ void		elimina_morte(t_hook *h)
 	i = 0;
 	while (h->sprite[i])
 	{
-		if (!h->sprite[i]->k)
+		if (!h->sprite[i]->life)
 			slitta_array(h, i);
 		if (h->sprite[i])
 			i++;

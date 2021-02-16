@@ -75,6 +75,11 @@ void	follow_player(t_hook *h, double *movex, double *movey, int i)
 		*movex *= 0;
 }
 
+double	distance_punti(double x1, double x2, double y1, double y2)
+{
+	return (sqrt((pow((int)x2, 2) - pow((int)x1, 2)) - (pow((int)y2, 2) - pow((int)y1, 2))));
+}
+
 int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
 {
 	double sicx;
@@ -91,6 +96,8 @@ int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
 	if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)] != '1' && 
 		h->map[(int)(spr->y + movey)][(int)(spr->x + movex)] != '1')
 		return (1);
+	else
+		return (0);
 	if (((int)h->sp->posx == (int)(spr->x + movex + sicx) &&
 		(int)(spr->y + movey + sicy) != (int) h->sp->posy))
 		return (1);
@@ -100,6 +107,8 @@ int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
 	else if (((int)h->sp->posx != (int)(spr->x + movex + sicx) &&
 		(int)(spr->y + movey + sicy) != (int) h->sp->posy))
 		return (1);
+	if (distance_punti(spr->x + movex, h->sp->posx, spr->y + movey, h->sp->posy) < 1)
+		h->sp->life -= 10;
 	return (0);
 }
 
@@ -108,11 +117,12 @@ void	movement_sprite(t_hook *h)
 	int i;
 
 	i = 0;
+	printf("life %d\n", h->sp->life);
 	while (h->sprite[i])
 	{
 		h->sprite[i]->movex = 0.009;
 		h->sprite[i]->movey = 0.009;
-		if ((rand() % 80) % 2 == 0)
+		if ((rand() % 80) <= 65)
 			random_gen(&h->sprite[i]->movex, &h->sprite[i]->movey);
 		else
 			follow_player(h, &h->sprite[i]->movex, &h->sprite[i]->movey, i);

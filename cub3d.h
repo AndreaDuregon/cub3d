@@ -97,6 +97,7 @@ typedef struct		s_spawn
 	int				sprint;
 	int				displayminimap;
 	int				hit_sprite;
+	int				life;
 	double			movspeed;
 	double			rotspeed;
 	double			*zbuff;

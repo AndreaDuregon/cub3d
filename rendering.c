@@ -194,6 +194,7 @@ void		rendering(char **map, t_var var, int sw)
 	h.sprite = s;
 	h.img = img;
 	h.vars = vars;
+	h.sp->life = 100;
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_hook(vars.win, 2, 1L << 0, set_key, &h);
 	mlx_hook(vars.win, 3, 1L << 1, unset_key, &h);
