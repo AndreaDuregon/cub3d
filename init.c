@@ -92,20 +92,6 @@ void			set_pos(char **map, t_spawn *sp, int i[3])
 	sp->posx = (double)i[1] + 0.5;
 }
 
-t_scia			*init_scia(t_scia *scia)
-{
-	int i;
-
-	i = 0;
-	while (i < 30)
-	{
-		scia[i].x = -1;
-		scia[i].y = -1;
-		i++;
-	}
-	return (scia);
-}
-
 int				set_sprite(t_sprite **s, int i[3], int count)
 {
 	if (!(s[i[2]] = malloc(sizeof(t_sprite) * (count + 1))))
@@ -114,12 +100,8 @@ int				set_sprite(t_sprite **s, int i[3], int count)
 	s[i[2]]->y = (double)i[0] + 0.5;
 	s[i[2]]->movex = 0.07;
 	s[i[2]]->movey = 0.07;
-	s[i[2]]->sw = 0;
-	if (!(s[i[2]]->scia = (t_scia *)malloc(sizeof(t_scia) * 31)))
-		return (0);
-	s[i[2]]->scia = init_scia(s[i[2]]->scia);
-	//s[i[2]]->scia[30] = 0;
-	s[i[2]]->k = 0;
+	s[i[2]]->life = 100;
+	s[i[2]]->k = 1;
 	i[2]++;
 	return (i[2]);
 }

@@ -93,6 +93,7 @@ typedef struct		s_spawn
 	int				jump;
 	int				appo;
 	int				swjp;
+	int				shoot;
 	int				sprint;
 	int				displayminimap;
 	int				hit_sprite;
@@ -127,21 +128,14 @@ typedef struct		s_tex
 	char			*buff;
 }					t_tex;
 
-typedef	struct		s_scia
-{
-	int				x;
-	int				y;
-}					t_scia;
-
 typedef	struct		s_sprite
 {
 	double			x;
 	double			y;
 	double			movex;
 	double			movey;
-	int				sw;
+	int				life;
 	int				k;
-	t_scia			*scia;
 }					t_sprite;
 
 typedef	struct		s_floceal
@@ -234,5 +228,6 @@ void				set_dir(t_spawn *sp, char c);
 void				movement_sprite(t_hook *h);
 void				screenshot(t_data img, t_var var);
 void				print_floor(t_hook *h);
+void				shoot(t_hook *h);
 
 #endif

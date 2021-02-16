@@ -74,6 +74,38 @@ int			fill_spr(int *spr_ord, double *spr_dist, int i, t_hook *h)
 	return (++i);
 }
 
+void		slitta_array(t_hook *h, int i)
+{
+	int j;
+	int k;
+
+	j = i + 1;
+	k = i;
+	while (h->sprite[k])
+	{
+		h->sprite[k] = h->sprite[j];
+		k++;
+		printf("00\n");
+		if (h->sprite[j])
+			j++;
+		printf("99\n");
+	}
+}
+
+void		elimina_morte(t_hook *h)
+{
+	int  i;
+
+	i = 0;
+	while (h->sprite[i])
+	{
+		if (!h->sprite[i]->k)
+			slitta_array(h, i);
+		if (h->sprite[i])
+			i++;
+	}
+}
+
 void		sprite_calc(t_hook *h)
 {
 	int i;
@@ -82,6 +114,7 @@ void		sprite_calc(t_hook *h)
 	double *spr_dist;
 
 	i = 0;
+	elimina_morte(h);
 	while (h->sprite[i])
 		i++;
 	count = i;

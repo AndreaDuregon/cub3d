@@ -61,14 +61,18 @@ void		random_gen(double *movex, double *movey)
 
 void	follow_player(t_hook *h, double *movex, double *movey, int i)
 {
-	if ((int)h->sprite[i]->y < (int)h->sp->posy)
+	if (h->sprite[i]->y < h->sp->posy)
 		*movey *= -(h->sprite[i]->y - h->sp->posy);
 	else
 		*movey *= -(h->sprite[i]->y - h->sp->posy);
-	if ((int)h->sprite[i]->x < (int)h->sp->posx)
+	if (h->sprite[i]->x < h->sp->posx)
 		*movex *= -(h->sprite[i]->x - h->sp->posx);
 	else
 		*movex *= -(h->sprite[i]->x - h->sp->posx);
+	if ((int)h->sprite[i]->y == (int)h->sp->posy)
+		*movey *= 0;
+	if ((int)h->sprite[i]->x == (int)h->sp->posx)
+		*movex *= 0;
 }
 
 int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
@@ -76,40 +80,27 @@ int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
 	double sicx;
 	double sicy;
 
-	sicy = 0.2;
-	sicx = 0.2;
+	sicy = 0.1;
+	sicx = 0.1;
 	if (movex < 0)
-		sicx *= -1;
+		sicx *= 1;
 	if (movey < 0)
-		sicy *= -1;
-	if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)] != '1' &&
-		((int)h->sp->posx != (int)(spr->y + movey + sicy) &&
+		sicy *= 1;
+	if (!spr->k)
+		return (0);
+	if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)] != '1')
+	{
+		if (((int)h->sp->posx == (int)(spr->x + movex + sicx) &&
 			(int)(spr->y + movey + sicy) != (int) h->sp->posy))
-		return (1);
+			return (1);
+		else if ((int)(spr->y + movey + sicy) == (int) h->sp->posy &&
+			(int)h->sp->posx != (int)(spr->x + movex + sicx))
+			return (1);
+		else if (((int)h->sp->posx != (int)(spr->x + movex + sicx) &&
+			(int)(spr->y + movey + sicy) != (int) h->sp->posy))
+			return (1);
+	}
 	return (0);
-}
-
-t_scia	set_scia(t_scia scia, t_hook *h, int i)
-{
-	if (scia.x >= 0 && scia.y >= 0)
-		if (h->map[scia.y][scia.x] == '1')
-			h->map[scia.y][scia.x] = '0';
-	scia.y = (int)h->sprite[i]->y;
-	scia.x = (int)h->sprite[i]->x;
-	h->map[scia.y][scia.x] = '1';
-	return (scia);
-}
-
-void	gest_scie(t_hook *h, int i)
-{
-	int k;
-
-	k = h->sprite[i]->k;
-	h->sprite[i]->scia[k] = set_scia(h->sprite[i]->scia[k], h, i);
-	if ((h->sprite[i]->k + 1) == 20)
-		h->sprite[i]->k = 0;
-	else
-		h->sprite[i]->k += 1;
 }
 
 void	movement_sprite(t_hook *h)

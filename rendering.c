@@ -75,6 +75,8 @@ int			set_key(int keycode, t_hook *h)
 		h->sp->sprint = 1;
 	if (keycode ==  14)
 		h->sp->displayminimap = 1;
+	if (keycode == 126)
+		h->sp->shoot = 1;
 	return (0);
 }
 

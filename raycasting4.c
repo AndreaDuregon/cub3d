@@ -64,6 +64,8 @@ int			raycasting(t_hook *h)
 		screenshot(h->img, h->var);
 		h->sp->sw = 0;
 	}
+	if (h->sp->shoot)
+		shoot(h);
 	if (h->sp->displayminimap)
 		printmap(h);
 	mlx_put_image_to_window(h->vars.mlx, h->vars.win, h->img.img, 0, 0);
