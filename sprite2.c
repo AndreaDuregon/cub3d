@@ -18,10 +18,12 @@ int			print_stripe(t_hook *h, int d, int y, int c)
 	h->spr->texy = ((d * 64) / h->spr->sprheight) / 256;
 	c = ((unsigned int *)(h->tex[4]->buff))[(int)(h->tex[4]->height
 									* h->spr->texy + h->spr->texx)];
-	if (c)
+	if (c != 13490999)
+	{
 		draw_dot(h, h->spr->stripe, y + h->sp->appo,
 					getcolor(h->tex[4], h->spr->texx, h->spr->texy,
 											h->sp->perpwalldist));
+	}
 	return (++y);
 }
 
