@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/12 17:14:48 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/16 11:44:06 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,5 +234,6 @@ void				set_dir(t_spawn *sp, char c);
 void				movement_sprite(t_hook *h);
 void				screenshot(t_data img, t_var var);
 void				print_floor(t_hook *h);
+void 				gunprinter(t_hook *h);
 
 #endif

@@ -75,8 +75,6 @@ unsigned int		**buff_alloc(int x, int y)
 	return (buff);
 }
 
-static void 
-
 void		print_floor(t_hook *h)
 {
 	int				y;
