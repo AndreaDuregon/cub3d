@@ -80,26 +80,26 @@ int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
 	double sicx;
 	double sicy;
 
-	sicy = 0.1;
-	sicx = 0.1;
+	sicy = 0.2;
+	sicx = 0.2;
 	if (movex < 0)
 		sicx *= 1;
 	if (movey < 0)
 		sicy *= 1;
 	if (!spr->k)
 		return (0);
-	if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)] != '1')
-	{
-		if (((int)h->sp->posx == (int)(spr->x + movex + sicx) &&
-			(int)(spr->y + movey + sicy) != (int) h->sp->posy))
-			return (1);
-		else if ((int)(spr->y + movey + sicy) == (int) h->sp->posy &&
-			(int)h->sp->posx != (int)(spr->x + movex + sicx))
-			return (1);
-		else if (((int)h->sp->posx != (int)(spr->x + movex + sicx) &&
-			(int)(spr->y + movey + sicy) != (int) h->sp->posy))
-			return (1);
-	}
+	if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)] != '1' && 
+		h->map[(int)(spr->y + movey)][(int)(spr->x + movex)] != '1')
+		return (1);
+	if (((int)h->sp->posx == (int)(spr->x + movex + sicx) &&
+		(int)(spr->y + movey + sicy) != (int) h->sp->posy))
+		return (1);
+	else if ((int)(spr->y + movey + sicy) == (int) h->sp->posy &&
+		(int)h->sp->posx != (int)(spr->x + movex + sicx))
+		return (1);
+	else if (((int)h->sp->posx != (int)(spr->x + movex + sicx) &&
+		(int)(spr->y + movey + sicy) != (int) h->sp->posy))
+		return (1);
 	return (0);
 }
 
@@ -112,8 +112,10 @@ void	movement_sprite(t_hook *h)
 	{
 		h->sprite[i]->movex = 0.009;
 		h->sprite[i]->movey = 0.009;
-		//random_gen(&h->sprite[i]->movex, &h->sprite[i]->movey);
-		follow_player(h, &h->sprite[i]->movex, &h->sprite[i]->movey, i);
+		if ((rand() % 80) % 2 == 0)
+			random_gen(&h->sprite[i]->movex, &h->sprite[i]->movey);
+		else
+			follow_player(h, &h->sprite[i]->movex, &h->sprite[i]->movey, i);
 		if (can_move(h->sprite[i], h, h->sprite[i]->movex, h->sprite[i]->movey))
 		{
 			h->map[(int)h->sprite[i]->y][(int)h->sprite[i]->x] = '0';
