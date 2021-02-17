@@ -33,24 +33,45 @@ double	distance_punti(double x1, double x2, double y1, double y2)
 	return (sqrt((pow(x2 - x1, 2)) + (pow(y2 - y1, 2))));
 }
 
-int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
+int		check_pos_wall(t_sprite *spr, t_hook *h, double movex, double movey)
 {
 	double sicx;
 	double sicy;
 
-	sicy = 0.5;
-	sicx = 0.5;
-	if (movex < 0)
-		sicx *= 1;
-	if (movey < 0)
-		sicy *= 1;
+	sicy = 0.1;
+	sicx = 0.1;
+	if (h->map[(int)(spr->y + movey)][(int)(spr->x + movex)] == '1')
+		return (0);
+	while (sicx < 0.9)
+	{
+		while (sicy < 0.9)
+		{
+			if (movex < 0)
+				sicx *= -1;
+			if (movey)
+				sicy *= -1;
+			if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)] == '1')
+				return (0);
+			if (movex < 0)
+				sicx *= -1;
+			if (movey)
+				sicy *= -1;
+			sicy += 0.1;
+		}
+		sicx += 0.1;
+	}
+	return (1);
+
+}
+
+int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
+{
 	if (!spr->k)
 		return (0);
 	if (distance_punti(spr->x + movex, h->sp->posx, spr->y +
 						movey, h->sp->posy) < 1)
 		h->sp->life -= 1;
-	if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)]
-	!= '1' && h->map[(int)(spr->y + movey)][(int)(spr->x + movex)] != '1')
+	if (check_pos_wall(spr, h, movex, movey))
 	{
 		if ((int)(spr->y + movey) == (int)h->sp->posy &&
 					(int)(spr->x + movex) == (int)h->sp->posx)

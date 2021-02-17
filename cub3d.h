@@ -170,6 +170,7 @@ typedef struct		s_hook
 	t_tex			*tex[15];
 	char			**minimap;
 	t_floceal		*floceal;
+	int				level;
 }					t_hook;
 
 int					ar_length(char **map);
@@ -248,5 +249,7 @@ void				set_move1(double *movex, double *movey);
 void				set_move2(double *movex, double *movey);
 void				set_move3(double *movex, double *movey);
 void				set_move4(double *movex, double *movey);
+void				next_level(t_hook *h);
+int					count_sprite(char **map);
 
 #endif

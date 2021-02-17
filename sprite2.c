@@ -18,7 +18,7 @@ int			print_stripe(t_hook *h, int d, int y, int c)
 	h->spr->texy = ((d * 64) / h->spr->sprheight) / 256;
 	c = ((unsigned int *)(h->tex[4]->buff))[(int)(h->tex[4]->height
 									* h->spr->texy + h->spr->texx)];
-	if (c != 13490999)
+	if (c != 13491257)
 	{
 		draw_dot(h, h->spr->stripe, y + h->sp->appo,
 					getcolor(h->tex[4], h->spr->texx, h->spr->texy,
@@ -48,6 +48,29 @@ void		print_sprite(t_hook *h)
 		}
 		h->spr->stripe++;
 	}
+}
+
+void		next_level(t_hook *h)
+{
+	int i;
+	int k;
+
+	i = 0;
+	while (h->map[i])
+	{
+		k = 0;
+		while (h->map[i][k])
+		{
+			if (h->map[i][k] == '0')
+			{
+				if ((rand() % 1000) <= (h->level))
+					h->map[i][k] = '2';
+			}
+			k++;
+		}
+		i++;
+	}
+	h->level++;
 }
 
 void		sprite_var(t_hook *h, int i, int *spr_ord, double *spr_dist)

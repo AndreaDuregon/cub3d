@@ -17,20 +17,20 @@ void	mirino(t_hook *h)
 	int x;
 	int y;
 
-	x = -30;
-	y = -30;
-	while (x < 30)
+	x = -7;
+	y = -7;
+	while (x < 7)
 	{
 		my_mlx_pixel_put(&h->img, (h->var.rx / 2) + x,
-						(h->var.ry / 2), create_trgb(0, 0,
-		255, 0));
+						(h->var.ry / 2), create_trgb(0, 255,
+		0, 0));
 		x++;
 	}
-	while (y < 30)
+	while (y < 7)
 	{
 		my_mlx_pixel_put(&h->img, (h->var.rx / 2),
-						(h->var.ry / 2) + y, create_trgb(0, 0,
-		255, 0));
+						(h->var.ry / 2) + y, create_trgb(0, 255,
+		0, 0));
 		y++;
 	}
 }
@@ -40,12 +40,12 @@ void	print_life(t_hook *h)
 	int x;
 	int y;
 
-	x = 0;
-	y = 0;
-	while (x < (h->sp->life * 2))
+	x = 10;
+	y = 10;
+	while (x < ((h->sp->life * 2) + 10))
 	{
-		y = 0;
-		while (y < 15)
+		y = 10;
+		while (y < 25)
 		{
 			if (h->sp->life < 30)
 				draw_dot(h, x, y, create_trgb(0, 255, 0, 0));
@@ -56,6 +56,45 @@ void	print_life(t_hook *h)
 			y++;
 		}
 		x++;
+	}
+}
+
+void	print_level(t_hook *h)
+{
+	int x;
+	int y;
+	int j;
+	int z;
+
+	x = h->var.rx - 5;
+	y = 15;
+	j = h->level;
+	while (j > 0)
+	{
+		z = 0;
+		while (z < 5)
+		{
+			y = 5;
+			while (y < 20)
+			{
+				draw_dot(h, x, y, create_trgb(0, 255, 0, 0));
+				y++;
+			}
+			z++;
+			x--;
+		}
+		z = 0;
+		while (z < 5)
+		{
+			y = 5;
+			while (y < 20)
+			{
+				y++;
+			}
+			z++;
+			x--;
+		}
+		j--;
 	}
 }
 
@@ -89,6 +128,7 @@ void	gunrender(t_hook *h)
 void	gunprinter(t_hook *h)
 {
 	print_life(h);
+	print_level(h);
 	mirino(h);
 	gunrender(h);
 }
