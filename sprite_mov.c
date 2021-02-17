@@ -6,58 +6,11 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:16:07 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/12 12:16:09 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/17 11:50:16 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void		random_gen(double *movex, double *movey)
-{
-	int n;
-
-	n = rand() % 80;
-	if (n <= (80 / 8))
-	{
-		*movex *= 1;
-		*movey *= 1;
-	}
-	else if (n > 10 && n <= 20)
-	{
-		*movex *= 1;
-		*movey *= -1;
-	}
-	else if (n > 20 && n <= 30)
-	{
-		*movex *= -1;
-		*movey *= 1;
-	}
-	else if (n > 30 && n <= 40)
-	{
-		*movex *= -1;
-		*movey *= -1;
-	}
-	else if (n > 40 && n <= 50)
-	{
-		*movex *= 1;
-		*movey *= 0;
-	}
-	else if (n > 50 && n <= 60)
-	{
-		*movex *= -1;
-		*movey *= 0;
-	}
-	else if (n > 60 && n <= 70)
-	{
-		*movex *= 0;
-		*movey *= -1;
-	}
-	else if (n > 70 && n <= (80))
-	{
-		*movex *= 0;
-		*movey *= 1;
-	}
-}
 
 void	follow_player(t_hook *h, double *movex, double *movey, int i)
 {
@@ -77,7 +30,7 @@ void	follow_player(t_hook *h, double *movex, double *movey, int i)
 
 double	distance_punti(double x1, double x2, double y1, double y2)
 {
-	return (sqrt((pow(x2 - x1, 2)) + (pow(y2 -y1, 2))));
+	return (sqrt((pow(x2 - x1, 2)) + (pow(y2 - y1, 2))));
 }
 
 int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
@@ -93,12 +46,14 @@ int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
 		sicy *= 1;
 	if (!spr->k)
 		return (0);
-	if (distance_punti(spr->x + movex, h->sp->posx, spr->y + movey, h->sp->posy) < 1)
+	if (distance_punti(spr->x + movex, h->sp->posx, spr->y +
+						movey, h->sp->posy) < 1)
 		h->sp->life -= 1;
-	if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)] != '1' && 
-		h->map[(int)(spr->y + movey)][(int)(spr->x + movex)] != '1')
+	if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)]
+	!= '1' && h->map[(int)(spr->y + movey)][(int)(spr->x + movex)] != '1')
 	{
-		if ((int)(spr->y + movey) == (int)h->sp->posy && (int)(spr->x + movex) == (int)h->sp->posx)
+		if ((int)(spr->y + movey) == (int)h->sp->posy &&
+					(int)(spr->x + movex) == (int)h->sp->posx)
 			return (0);
 		return (1);
 	}
@@ -117,7 +72,7 @@ void	movement_sprite(t_hook *h)
 		//if ((rand() % 80) <= 55)
 		//	random_gen(&h->sprite[i]->movex, &h->sprite[i]->movey);
 		//else
-		if (distance_punti(h->sprite[i]->x , h->sp->posx, h->sprite[i]->y , h->sp->posy) < 13)
+		if (distance_punti(h->sprite[i]->x, h->sp->posx, h->sprite[i]->y, h->sp->posy) < 13)
 		{
 			h->sprite[i]->movex = 0.03;
 			h->sprite[i]->movey = 0.03;
@@ -126,7 +81,7 @@ void	movement_sprite(t_hook *h)
 		if (can_move(h->sprite[i], h, h->sprite[i]->movex, h->sprite[i]->movey))
 		{
 			h->map[(int)h->sprite[i]->y][(int)h->sprite[i]->x] = '0';
-			//if (((int)(h->sprite[i]->x + h->sprite[i]->movex) != (int)h->sprite[i]->x || 
+			//if (((int)(h->sprite[i]->x + h->sprite[i]->movex) != (int)h->sprite[i]->x ||
 			//	(int)(h->sprite[i]->y + h->sprite[i]->movey) != (int)h->sprite[i]->y))
 			//	gest_scie(h, i);
 			h->sprite[i]->x += h->sprite[i]->movex;

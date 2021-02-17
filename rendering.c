@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:57:41 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/16 12:09:39 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/17 12:04:52 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,149 +25,10 @@ int		create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int			unset_key(int keycode, t_hook *h)
-{
-	if (keycode == 123)
-		h->sp->lr = 0;
-	if (keycode == 124)
-		h->sp->lr = 0;
-	if (keycode == 13)
-		h->sp->fb = 0;
-	if (keycode == 1)
-		h->sp->fb = 0;
-	if (keycode == 0)
-		h->sp->sm = 0;
-	if (keycode == 2)
-		h->sp->sm = 0;
-	if (keycode == 257)
-	{
-		h->sp->jump = 0;
-		h->sp->appo = 0;
-	}
-	if (keycode == 12)
-		h->sp->sprint = 0;
-	if (keycode ==  14)
-		h->sp->displayminimap = 0;
-	return (0);
-}
-
-int			set_key(int keycode, t_hook *h)
-{
-	if (keycode == 53)
-		exit(0);
-	if (keycode == 123)
-		h->sp->lr = 1;
-	if (keycode == 124)
-		h->sp->lr = -1;
-	if (keycode == 13)
-		h->sp->fb = 1;
-	if (keycode == 1)
-		h->sp->fb = -1;
-	if (keycode == 2)
-		h->sp->sm = 1;
-	if (keycode == 0)
-		h->sp->sm = -1;
-	if (keycode == 49)
-		h->sp->jump = 1;
-	if (keycode == 257)
-		h->sp->jump = -1;
-	if (keycode == 12)
-		h->sp->sprint = 1;
-	if (keycode ==  14)
-		h->sp->displayminimap = 1;
-	if (keycode == 126)
-		h->sp->shoot = 1;
-	return (0);
-}
-
 int			check_mov(char c)
 {
 	if (c != '1' && c != '2')
 		return (1);
-	return (0);
-}
-
-int			set_key_render(t_hook *h)
-{
-	double olddirx;
-	double oldplanex;
-
-	if (h->sp->lr == 1)
-	{
-		olddirx = h->sp->dirx;
-		h->sp->dirx = h->sp->dirx * cos(-h->sp->rotspeed) - h->sp->diry
-					* sin(-h->sp->rotspeed);
-		h->sp->diry = olddirx * sin(-h->sp->rotspeed) + h->sp->diry
-					* cos(-h->sp->rotspeed);
-		oldplanex = h->sp->planex;
-		h->sp->planex = h->sp->planex * cos(-h->sp->rotspeed) - h->sp->planey
-					* sin(-h->sp->rotspeed);
-		h->sp->planey = oldplanex * sin(-h->sp->rotspeed) + h->sp->planey
-					* cos(-h->sp->rotspeed);
-	}
-	if (h->sp->lr == -1)
-	{
-		olddirx = h->sp->dirx;
-		h->sp->dirx = h->sp->dirx * cos(h->sp->rotspeed) - h->sp->diry
-					* sin(h->sp->rotspeed);
-		h->sp->diry = olddirx * sin(h->sp->rotspeed) + h->sp->diry
-					* cos(h->sp->rotspeed);
-		oldplanex = h->sp->planex;
-		h->sp->planex = h->sp->planex * cos(h->sp->rotspeed) - h->sp->planey
-					* sin(h->sp->rotspeed);
-		h->sp->planey = oldplanex * sin(h->sp->rotspeed) + h->sp->planey
-					* cos(h->sp->rotspeed);
-	}
-	if (h->sp->fb == 1)
-	{
-		if (check_mov(h->map[(int)(h->sp->posy + h->sp->diry * h->sp->movspeed)][(int)(h->sp->posx)]))
-			h->sp->posy += h->sp->diry * h->sp->movspeed;
-		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx + h->sp->dirx * h->sp->movspeed)]))
-			h->sp->posx += h->sp->dirx * h->sp->movspeed;
-	}
-	if (h->sp->fb == -1)
-	{
-		if (check_mov(h->map[(int)(h->sp->posy - h->sp->diry * h->sp->movspeed)][(int)(h->sp->posx)]))
-			h->sp->posy -= h->sp->diry * h->sp->movspeed;
-		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx - h->sp->dirx * h->sp->movspeed)]))
-			h->sp->posx -= h->sp->dirx * h->sp->movspeed;
-	}
-	if (h->sp->sm == 1)
-	{
-		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx - h->sp->diry * h->sp->movspeed)]))
-			h->sp->posx -= h->sp->diry * h->sp->movspeed;
-		if (check_mov(h->map[(int)(h->sp->posy + h->sp->dirx * h->sp->movspeed)][(int)(h->sp->posx)]))
-			h->sp->posy += h->sp->dirx * h->sp->movspeed;
-	}
-		if (h->sp->sm == -1)
-	{
-		if (check_mov(h->map[(int)(h->sp->posy)][(int)(h->sp->posx + h->sp->diry * h->sp->movspeed)]))
-			h->sp->posx += h->sp->diry * h->sp->movspeed;
-		if (check_mov(h->map[(int)(h->sp->posy - h->sp->dirx * h->sp->movspeed)][(int)(h->sp->posx)]))
-			h->sp->posy -= h->sp->dirx * h->sp->movspeed;
-	}
-	if (h->sp->jump == 1)
-	{
-		if (!h->sp->appo)
-			h->sp->appo = 1;
-		if ((h->sp->appo * 2) < 200 && h->sp->swjp == 0)
-			h->sp->appo += 30;
-		else if ((h->sp->appo * 2) > 200 && h->sp->swjp == 0)
-			h->sp->swjp = 1;
-		if ((h->sp->appo / 2) <= 0 && h->sp->swjp == 1)
-		{
-			h->sp->jump = 0;
-			h->sp->swjp = 0;
-			h->sp->appo = 1;
-		}
-		else if ((h->sp->appo / 2) > 0 && h->sp->swjp == 1)
-			h->sp->appo = h->sp->appo - 30;
-	}
-	if (h->sp->jump == -1)
-		h->sp->appo = -30;
-	if (h->sp->sprint == 1)
-		h->sp->movspeed = 0.13;
-	raycasting(h);
 	return (0);
 }
 

@@ -29,10 +29,16 @@ SRCS	=	cub3d.c \
 			sprite2.c \
 			print_map.c \
 			sprite_mov.c \
+			sprite_move2.c \
+			sprite_move3.c \
 			screenshot.c \
 			floor.c \
+			floor2.c \
 			gun.c \
-			gunprinter.c
+			gun2.c \
+			gunprinter.c \
+			set_key.c \
+			key_press.c
 
 OBJ		=	$(SRCS:.c=.o)
 

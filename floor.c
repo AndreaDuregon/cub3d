@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   floor.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:15:28 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/16 11:27:41 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/17 09:54:25 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		print_background(t_hook *h, t_var var, t_data img, unsigned int **buffer)
+void				print_background(t_hook *h, t_var var, t_data img,
+							unsigned int **buffer)
 {
 	int x;
 	int y;
@@ -30,7 +31,7 @@ void		print_background(t_hook *h, t_var var, t_data img, unsigned int **buffer)
 	}
 }
 
-void		ft_helper(t_hook *h, int y, unsigned int **buffer, int x)
+void				ft_helper(t_hook *h, int y, unsigned int **buffer, int x)
 {
 	int tx;
 	int ty;
@@ -43,9 +44,7 @@ void		ft_helper(t_hook *h, int y, unsigned int **buffer, int x)
 		celly = (int)(h->floceal->floory);
 		tx = (int)(64 * (h->floceal->floorx - cellx)) & (63);
 		ty = (int)(64 * (h->floceal->floory - celly)) & (63);
-		h->floceal->floorx += h->floceal->floorstepx;
-		h->floceal->floory += h->floceal->floorstepy;
-		h->floceal->cbpatt = (int)(cellx + celly) & 1;
+		set_floceal2(h->floceal, cellx, celly);
 		if (h->floceal->cbpatt == 0)
 			h->floceal->floortex = 4;
 		h->floceal->ceiltex = 6;
@@ -53,8 +52,10 @@ void		ft_helper(t_hook *h, int y, unsigned int **buffer, int x)
 		h->floceal->color = h->tex[0]->buff[64 * ty + tx];
 		if ((y + h->sp->appo) < (h->var.ry) && (y + h->sp->appo) >= (0))
 			buffer[y + h->sp->appo][x] = getcolor(h->tex[5], tx, ty, 64);
-		if ((h->var.ry + h->sp->appo - y - 1) < (h->var.ry) && (h->var.ry + h->sp->appo - y - 1) >= (0))
-			buffer[h->var.ry + h->sp->appo - y - 1][x] = getcolor(h->tex[6], tx, ty, 64);
+		if ((h->var.ry + h->sp->appo - y - 1) < (h->var.ry) &&
+			(h->var.ry + h->sp->appo - y - 1) >= (0))
+			buffer[h->var.ry + h->sp->appo - y - 1][x] =
+					getcolor(h->tex[6], tx, ty, 64);
 		x++;
 	}
 }
@@ -75,7 +76,7 @@ unsigned int		**buff_alloc(int x, int y)
 	return (buff);
 }
 
-void		print_floor(t_hook *h)
+void				print_floor(t_hook *h)
 {
 	int				y;
 	int				end;
@@ -83,25 +84,11 @@ void		print_floor(t_hook *h)
 
 	buffer = buff_alloc(h->var.rx, h->var.ry);
 	y = 0;
-	end = (h->sp->appo >= 0) ? h->var.ry + h->sp->appo : h->var.ry + h->sp->appo * -2;
+	end = (h->sp->appo >= 0) ?
+			h->var.ry + h->sp->appo : h->var.ry + h->sp->appo * -2;
 	while (y < end)
 	{
-		h->floceal->raydirya = -h->sp->diry - h->sp->planey;
-		h->floceal->raydirxa = -h->sp->dirx - h->sp->planex;
-		h->floceal->raydiryb = -h->sp->diry + h->sp->planey;
-		h->floceal->raydirxb = -h->sp->dirx + h->sp->planex;
-		h->floceal->p = y - h->var.ry / 2;
-		h->floceal->posz = 0.5 * h->var.ry;
-		h->floceal->rowdistance = -h->floceal->posz / h->floceal->p;
-		h->floceal->floorstepx = h->floceal->rowdistance *
-				(h->floceal->raydirxb - h->floceal->raydirxa) /
-													h->var.rx;
-		h->floceal->floorstepy = h->floceal->rowdistance *
-			(h->floceal->raydiryb - h->floceal->raydirya) / h->var.rx;
-		h->floceal->floorx = h->sp->posx + h->floceal->rowdistance *
-												h->floceal->raydirxa;
-		h->floceal->floory = h->sp->posy + h->floceal->rowdistance *
-												h->floceal->raydirya;
+		set_floceal(h, y);
 		ft_helper(h, y, buffer, 0);
 		y++;
 	}

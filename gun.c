@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gun.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/17 09:54:40 by aduregon          #+#    #+#             */
+/*   Updated: 2021/02/17 09:59:01 by aduregon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -30,28 +41,14 @@ void		var_dda_gun(t_spawn *sp)
 	}
 }
 
-int		dda_gun(t_spawn *sp, char **map, int *x, int *y)
+int			dda_gun(t_spawn *sp, char **map, int *x, int *y)
 {
 	while (1)
 	{
 		if (sp->sidedistx <= sp->sidedisty)
-		{
-			sp->sidedistx += sp->deltadistx;
-			sp->mapx += sp->stepx;
-			if (sp->stepx == 1)
-				sp->side = 0;
-			else if (sp->stepx == -1)
-				sp->side = 2;
-		}
+			guny(sp);
 		else if (sp->sidedistx > sp->sidedisty)
-		{
-			sp->sidedisty += sp->deltadisty;
-			sp->mapy += sp->stepy;
-			if (sp->stepy == 1)
-				sp->side = 1;
-			else if (sp->stepy == -1)
-				sp->side = 3;
-		}
+			gunx(sp);
 		if (map[sp->mapy][sp->mapx] == '2')
 		{
 			*x = sp->mapx;
@@ -69,7 +66,7 @@ int		dda_gun(t_spawn *sp, char **map, int *x, int *y)
 	}
 }
 
-int		search_sprite(t_hook *h, int x, int y)
+int			search_sprite(t_hook *h, int x, int y)
 {
 	int i;
 
@@ -77,7 +74,7 @@ int		search_sprite(t_hook *h, int x, int y)
 	while (h->sprite[i])
 	{
 		if ((int)h->sprite[i]->x == x && (int)h->sprite[i]->y == y)
-			return (i); 
+			return (i);
 		i++;
 	}
 	return (-1);
@@ -94,7 +91,7 @@ void		shoot(t_hook *h)
 	{
 		if ((i = search_sprite(h, x, y)) == -1)
 			return ;
-		h->sprite[i]->life -=  50;
+		h->sprite[i]->life -= 50;
 		if (h->sprite[i]->life <= 0)
 		{
 			h->sprite[i]->k = 0;

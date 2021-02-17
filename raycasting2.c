@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 18:50:51 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/09 18:52:05 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/17 10:01:05 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void		height_calc(t_spawn *sp, t_var var)
 		sp->drawend = var.ry;
 }
 
-void	set_speed(t_spawn *sp)
+void		set_speed(t_spawn *sp)
 {
 	sp->movspeed = 0.07;
 	sp->rotspeed = 0.09;
 }
 
-void	draw_dot(t_hook *h, int x, int y, int color)
+void		draw_dot(t_hook *h, int x, int y, int color)
 {
 	char	b;
 	char	g;
@@ -57,7 +57,7 @@ void	draw_dot(t_hook *h, int x, int y, int color)
 	h->img.addr[i + 2] = r;
 }
 
-int		getcolor(t_tex *tex, int x, int y, int fade)
+int			getcolor(t_tex *tex, int x, int y, int fade)
 {
 	int	color;
 	int	c;

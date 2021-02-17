@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/16 11:44:06 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/17 12:04:45 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,23 @@ void				movement_sprite(t_hook *h);
 void				screenshot(t_data img, t_var var);
 void				print_floor(t_hook *h);
 void				shoot(t_hook *h);
-void 				gunprinter(t_hook *h);
+void				gunprinter(t_hook *h);
+void				set_floceal(t_hook *h, int y);
+void				set_floceal2(t_floceal *fl, int cellx, int celly);
+void				guny(t_spawn *sp);
+void				gunx(t_spawn *sp);
+int					set_key_render(t_hook *h);
+int					check_mov(char c);
+int					unset_key(int keycode, t_hook *h);
+int					set_key(int keycode, t_hook *h);
+void				sprite_var(t_hook *h, int i, int *spr_ord,
+								double *spr_dist);
+void				manage_sprite(t_hook *h, int i, int *spr_ord,
+								double *spr_dist);
+void				random_gen(double *movex, double *movey);
+void				set_move1(double *movex, double *movey);
+void				set_move2(double *movex, double *movey);
+void				set_move3(double *movex, double *movey);
+void				set_move4(double *movex, double *movey);
 
 #endif

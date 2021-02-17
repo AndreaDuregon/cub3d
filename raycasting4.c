@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 19:01:19 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/16 12:10:19 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/17 10:15:35 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,21 @@ void		ft_save_img(char *img, t_hook *h)
 	close(fd);
 }
 
+void		raycasting2(t_hook *h)
+{
+	gunprinter(h);
+	if (h->sp->shoot)
+		shoot(h);
+	h->sp->shoot = 0;
+	if (h->sp->displayminimap)
+		printmap(h);
+	if (h->sp->life <= 0)
+	{
+		printf("gameover\n");
+		exit(0);
+	}
+}
+
 int			raycasting(t_hook *h)
 {
 	int x;
@@ -64,17 +79,7 @@ int			raycasting(t_hook *h)
 		screenshot(h->img, h->var);
 		h->sp->sw = 0;
 	}
-	gunprinter(h);
-	if (h->sp->shoot)
-		shoot(h);
-	h->sp->shoot = 0;
-	if (h->sp->displayminimap)
-		printmap(h);
-	if (h->sp->life <= 0)
-	{
-		printf("gameover\n");
-		exit(0);
-	}
+	raycasting2(h);
 	mlx_put_image_to_window(h->vars.mlx, h->vars.win, h->img.img, 0, 0);
 	if (!(mlx_destroy_image(h->vars.mlx, h->img.img)))
 		return (0);

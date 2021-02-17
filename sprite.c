@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:22:32 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 19:33:53 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/17 11:06:24 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		sort_sprite(int *spr_ord, double *spr_dist)
 {
-	int		i;
+	int			i;
 	double		temp;
 
 	i = 0;
@@ -33,35 +33,6 @@ void		sort_sprite(int *spr_ord, double *spr_dist)
 		else
 			i++;
 	}
-}
-
-void		sprite_var(t_hook *h, int i, int *spr_ord, double *spr_dist)
-{
-	h->spr->spritex = h->sprite[spr_ord[i]]->x - h->sp->posx;
-	h->spr->spritey = h->sprite[spr_ord[i]]->y - h->sp->posy;
-	h->spr->invcam = 1.0 / (h->sp->planex * h->sp->diry -
-							h->sp->dirx * h->sp->planey);
-	h->spr->transx = -h->spr->invcam * (h->sp->diry * h->spr->spritex
-									- h->sp->dirx * h->spr->spritey);
-	h->spr->transy = h->spr->invcam * (-(h->sp->planey) * h->spr->spritex
-										+ h->sp->planex * h->spr->spritey);
-	h->spr->screenx = (int)((h->var.rx / 2) *
-					(1 + h->spr->transx / h->spr->transy));
-	h->spr->sprheight = abs((int)(h->var.ry / (h->spr->transy)));
-	h->spr->sprdrawstarty = -(h->spr->sprheight) / 2 + h->var.ry / 2;
-	if (h->spr->sprdrawstarty < 0)
-		h->spr->sprdrawstarty = 0;
-	h->spr->sprdrawendy = h->spr->sprheight / 2 + h->var.ry / 2;
-	if (h->spr->sprdrawendy >= h->var.ry)
-		h->spr->sprdrawendy = h->var.ry - 1;
-	h->spr->sprwidth = abs((int)(h->var.ry / (h->spr->transy)));
-	h->spr->sprdrawstartx = -(h->spr->sprwidth) / 2 + h->spr->screenx;
-	if (h->spr->sprdrawstartx < 0)
-		h->spr->sprdrawstartx = 0;
-	h->spr->sprdrawendx = h->spr->sprwidth / 2 + h->spr->screenx;
-	if (h->spr->sprdrawendx >= h->var.rx)
-		h->spr->sprdrawendx = h->var.rx - 1;
-	h->spr->stripe = h->spr->sprdrawstartx;
 }
 
 int			fill_spr(int *spr_ord, double *spr_dist, int i, t_hook *h)
@@ -92,7 +63,7 @@ void		slitta_array(t_hook *h, int i)
 
 void		elimina_morte(t_hook *h)
 {
-	int  i;
+	int	i;
 
 	i = 0;
 	while (h->sprite[i])
@@ -106,10 +77,10 @@ void		elimina_morte(t_hook *h)
 
 void		sprite_calc(t_hook *h)
 {
-	int i;
-	int count;
-	int *spr_ord;
-	double *spr_dist;
+	int		i;
+	int		count;
+	int		*spr_ord;
+	double	*spr_dist;
 
 	i = 0;
 	elimina_morte(h);
@@ -128,8 +99,7 @@ void		sprite_calc(t_hook *h)
 	i = 0;
 	while (i < count)
 	{
-		sprite_var(h, i, spr_ord, spr_dist);
-		print_sprite(h);
+		manage_sprite(h, i, spr_ord, spr_dist);
 		i++;
 	}
 }
