@@ -28,6 +28,7 @@ SRCS	=	cub3d.c \
 			init2.c \
 			sprite.c \
 			sprite2.c \
+			sprite3.c \
 			print_map.c \
 			sprite_mov.c \
 			sprite_move2.c \
@@ -38,6 +39,7 @@ SRCS	=	cub3d.c \
 			gun.c \
 			gun2.c \
 			gunprinter.c \
+			gunprinter2.c \
 			set_key.c \
 			key_press.c
 

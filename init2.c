@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 14:04:18 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/02/18 17:27:44 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 18:12:08 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			ar_length(char **map)
+int				ar_length(char **map)
 {
 	int i;
 

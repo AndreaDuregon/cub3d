@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_mov.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:16:07 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/17 11:50:16 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 18:24:56 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,7 @@ int		check_pos_wall(t_sprite *spr, t_hook *h, double movex, double movey)
 		return (0);
 	if (h->map[(int)(spr->y + movey)][(int)(spr->x + movex + sicx)] == '1')
 		return (0);
-	/*while (sicx < 0.9)
-	{
-		while (sicy < 0.9)
-		{
-			if (movex < 0)
-				sicx *= -1;
-			if (movey)
-				sicy *= -1;
-			if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex + sicx)] == '1')
-				return (0);
-			if (movex < 0)
-				sicx *= -1;
-			if (movey)
-				sicy *= -1;
-			sicy += 0.1;
-		}
-		sicx += 0.1;
-	}*/
 	return (1);
-
 }
 
 int		can_move(t_sprite *spr, t_hook *h, double movex, double movey)
@@ -94,10 +75,8 @@ void	movement_sprite(t_hook *h)
 	i = 0;
 	while (h->sprite[i])
 	{
-		//if ((rand() % 80) <= 55)
-		//	random_gen(&h->sprite[i]->movex, &h->sprite[i]->movey);
-		//else
-		if (distance_punti(h->sprite[i]->x, h->sp->posx, h->sprite[i]->y, h->sp->posy) < 13)
+		if (distance_punti(h->sprite[i]->x, h->sp->posx,
+					h->sprite[i]->y, h->sp->posy) < 13)
 		{
 			h->sprite[i]->movex = 0.03;
 			h->sprite[i]->movey = 0.03;
@@ -106,9 +85,6 @@ void	movement_sprite(t_hook *h)
 		if (can_move(h->sprite[i], h, h->sprite[i]->movex, h->sprite[i]->movey))
 		{
 			h->map[(int)h->sprite[i]->y][(int)h->sprite[i]->x] = '0';
-			//if (((int)(h->sprite[i]->x + h->sprite[i]->movex) != (int)h->sprite[i]->x ||
-			//	(int)(h->sprite[i]->y + h->sprite[i]->movey) != (int)h->sprite[i]->y))
-			//	gest_scie(h, i);
 			h->sprite[i]->x += h->sprite[i]->movex;
 			h->sprite[i]->y += h->sprite[i]->movey;
 			h->map[(int)h->sprite[i]->y][(int)h->sprite[i]->x] = '2';

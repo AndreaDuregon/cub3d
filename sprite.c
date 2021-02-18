@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:22:32 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 14:31:43 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 18:21:37 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,55 +45,6 @@ int			fill_spr(int *spr_ord, double *spr_dist, int i, t_hook *h)
 	return (++i);
 }
 
-void		slitta_array(t_hook *h, int i)
-{
-	int j;
-	int k;
-
-	j = i + 1;
-	k = i;
-	while (h->sprite[k])
-	{
-		h->sprite[k] = h->sprite[j];
-		k++;
-		if (h->sprite[j])
-			j++;
-	}
-}
-
-void		elimina_morte(t_hook *h)
-{
-	int	i;
-
-	i = 0;
-	while (h->sprite[i])
-	{
-		if (!h->sprite[i]->life)
-		{
-			slitta_array(h, i);
-			h->sp->life += 2;
-			if (h->sp->life > 100)
-				h->sp->life = 100;
-		}
-		if (h->sprite[i])
-			i++;
-	}
-}
-
-void		free_sprite(t_hook *h)
-{
-	int i;
-	int k;
-
-	i = 0;
-	while (i < h->nsprite)
-	{
-		free(h->sprite[i]);
-		i++;
-	}
-	free(h->sprite);
-}
-
 void		reset_sprite(t_hook *h)
 {
 	t_sprite **s;
@@ -101,6 +52,24 @@ void		reset_sprite(t_hook *h)
 	free_sprite(h);
 	next_level(h);
 	h->sprite = init_spawn(h->map, h->sp, s);
+}
+
+void		sprite_calc2(t_hook *h, int *spr_ord, double *spr_dist, int count)
+{
+	int i;
+
+	i = 0;
+	while (i < count)
+		i = fill_spr(spr_ord, spr_dist, i, h);
+	spr_ord[i] = 0;
+	spr_dist[i] = 0;
+	sort_sprite(spr_ord, spr_dist);
+	i = 0;
+	while (i < count)
+	{
+		manage_sprite(h, i, spr_ord, spr_dist);
+		i++;
+	}
 }
 
 void		sprite_calc(t_hook *h)
@@ -123,18 +92,7 @@ void		sprite_calc(t_hook *h)
 	if (!(spr_ord = malloc(sizeof(int) * (count + 1))) ||
 		!(spr_dist = malloc(sizeof(double) * (count + 1))))
 		return ;
-	i = 0;
-	while (i < count)
-		i = fill_spr(spr_ord, spr_dist, i, h);
-	spr_ord[i] = 0;
-	spr_dist[i] = 0;
-	sort_sprite(spr_ord, spr_dist);
-	i = 0;
-	while (i < count)
-	{
-		manage_sprite(h, i, spr_ord, spr_dist);
-		i++;
-	}
+	sprite_calc2(h, spr_ord, spr_dist, count);
 	free(spr_ord);
 	free(spr_dist);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rule3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:54:51 by aduregon          #+#    #+#             */
-/*   Updated: 2021/01/31 12:35:43 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 18:15:22 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ void		parse_value(char *line, char *reg, t_var *var)
 	if (line[i] != '\0')
 		format_rule_err(line, reg);
 	insert_value(temp, var);
-	if (reg[0] == '0')
-		reg[0] = '1';
-	else
-		exist_rule_err(line, reg);
+	(reg[0] == '0') ? reg[0] = '1' : exist_rule_err(line, reg);
 }
 
 int			is_digit_space(char *line, int i)

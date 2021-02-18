@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rule2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:51:31 by aduregon          #+#    #+#             */
-/*   Updated: 2021/01/31 12:39:45 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 18:13:49 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void		parse_rgb_c(char *line, char *reg, t_var *var)
 	int		i;
 	char	*temp;
 
-	i = 2;
-	i = is_space(line, i);
+	i = is_space(line, 2);
 	if (!ft_isdigit(line[i]))
 		format_rule_err(line, reg);
 	temp = ft_strtrim(&line[i], " \t");
@@ -84,8 +83,7 @@ void		parse_rgb_f(char *line, char *reg, t_var *var)
 	int		i;
 	char	*temp;
 
-	i = 2;
-	i = is_space(line, i);
+	i = is_space(line, 2);
 	if (!ft_isdigit(line[i]))
 		format_rule_err(line, reg);
 	temp = ft_strtrim(&line[i], " \t");

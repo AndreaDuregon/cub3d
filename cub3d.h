@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 17:25:25 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 18:37:51 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,5 +257,10 @@ int					ar_length(char **map);
 char				**minimap_init(char **minimap, char **map);
 void				set_text(t_hook *h, t_var var, t_vars vars);
 void				buff_free(int x, int y);
+void				slitta_array(t_hook *h, int i);
+void				elimina_morte(t_hook *h);
+void				free_sprite(t_hook *h);
+void				mirino(t_hook *h);
+void				print_life(t_hook *h);
 
 #endif

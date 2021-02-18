@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 18:30:37 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/16 12:09:15 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 18:27:18 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int		max_line(t_hook *h)
 
 void	color_calc(t_hook *h, int x[2], int y[2])
 {
-	if (h->map[x[1]][y[1]] == '0' || h->map[x[1]][y[1]] == 'N' || h->map[x[1]][y[1]] == 'W' ||
+	if (h->map[x[1]][y[1]] == '0' || h->map[x[1]][y[1]] == 'N' ||
+		h->map[x[1]][y[1]] == 'W' ||
 		h->map[x[1]][y[1]] == 'E' || h->map[x[1]][y[1]] == 'S')
 		my_mlx_pixel_put(&h->img, y[0], x[0], create_trgb(200, 64,
 							64, 64));
@@ -66,8 +67,7 @@ void	put_img_minimap(t_hook *h)
 			color_calc(h, x, y);
 			y[0]++;
 		}
-		if ((x[0] % sizey[0]) == 0 && h->map[x[1] + 1])
-			x[1]++;
+		((x[0] % sizey[0]) == 0 && h->map[x[1] + 1]) ? x[1]++ : x[1];
 		x[0]++;
 	}
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gun.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:54:40 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 16:46:24 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 18:40:22 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		var_dda_gun(t_spawn *sp, int x, t_hook *h)
+void		set_dda(t_spawn *sp, int x, t_hook *h)
 {
 	sp->camerax = 2 * x / (double)h->var.rx - 1;
 	sp->raydirx = sp->dirx + sp->planex * -sp->camerax;
@@ -22,6 +22,11 @@ void		var_dda_gun(t_spawn *sp, int x, t_hook *h)
 	sp->deltadistx = fabs(1 / sp->raydirx);
 	sp->deltadisty = fabs(1 / sp->raydiry);
 	sp->hit = 0;
+}
+
+void		var_dda_gun(t_spawn *sp, int x, t_hook *h)
+{
+	set_dda(sp, x, h);
 	if (sp->raydirx < 0)
 	{
 		sp->stepx = -1;
