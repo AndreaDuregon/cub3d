@@ -1,9 +1,9 @@
-R 1900 1000
+R 700 400
 NO ./texture/wallbrick.xpm
 SO ./texture/wallbrick2.xpm
 WE ./texture/wallbrick2.xpm
 EA ./texture/wallbrick.xpm
-S ./texture/zombiehd.xpm
+S ./texture/zombib.xpm
 F 0,0,0
 C 0,0,0
 
