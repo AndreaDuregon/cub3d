@@ -1,4 +1,4 @@
-R 1900 1000
+R 900 500
 NO ./texture/wallbrick.xpm
 SO ./texture/wallbrick2.xpm
 WE ./texture/wallbrick2.xpm

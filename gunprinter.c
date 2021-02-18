@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gunprinter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 11:37:19 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/02/17 10:00:41 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 16:14:58 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,25 @@ void	print_level(t_hook *h)
 	}
 }
 
+int		resizer(t_hook *h, int mod)
+{
+	int x;
+	int n;
+	int i;
+
+	x = h->var.rx / 7;
+	i = 1;
+	n = 0;
+	while (n < (x * 2))
+	{
+		n = 64 * i;
+		i++;
+	}
+	if (!mod)
+		return (n / 2);
+	return (i - 1);
+}
+
 void	gunrender(t_hook *h)
 {
 	int x;
@@ -108,17 +127,17 @@ void	gunrender(t_hook *h)
 	texn = 7;
 	if (h->sp->shoot)
 		texn = 8;
-	x = -128;
-	while (x < 128)
+	x = -resizer(h, 0);
+	while (x < resizer(h, 0))
 	{
-		y = -128;
-		while (y < 128)
+		y = -resizer(h, 0);
+		while (y < resizer(h, 0))
 		{
 			color = getcolor(h->tex[texn],
-							(x + 128) / 4, (y + 128) / 4, 0);
+							(x + resizer(h, 0)) / resizer(h, 1), (y + resizer(h, 0)) / resizer(h, 1), 0);
 			if (color != -3351495)
-				draw_dot(h, (h->var.rx / 2) + x + 85,
-						(h->var.ry * 0.78) + y, color);
+				draw_dot(h, (h->var.rx / 2) + x + (h->var.rx / 6),
+						(h->var.ry - resizer(h, 0)) + y, color);
 			y++;
 		}
 		x++;

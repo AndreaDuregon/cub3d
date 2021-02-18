@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   gun.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:54:40 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/17 09:59:01 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 16:46:24 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		var_dda_gun(t_spawn *sp)
+void		var_dda_gun(t_spawn *sp, int x, t_hook *h)
 {
+	sp->camerax = 2 * x / (double)h->var.rx - 1;
+	sp->raydirx = sp->dirx + sp->planex * -sp->camerax;
+	sp->raydiry = sp->diry + sp->planey * -sp->camerax;
 	sp->mapy = (int)sp->posy;
 	sp->mapx = (int)sp->posx;
-	sp->deltadistx = fabs(1 / sp->dirx);
-	sp->deltadisty = fabs(1 / sp->diry);
+	sp->deltadistx = fabs(1 / sp->raydirx);
+	sp->deltadisty = fabs(1 / sp->raydiry);
 	sp->hit = 0;
 	if (sp->raydirx < 0)
 	{
@@ -85,17 +88,24 @@ void		shoot(t_hook *h)
 	int x;
 	int y;
 	int i;
+	int x2;
 
-	var_dda_gun(h->sp);
-	if (dda_gun(h->sp, h->map, &x, &y))
+	x2 = (h->var.rx / 2 - 1);
+	while (x2 < (h->var.rx / 2 + 1))
 	{
-		if ((i = search_sprite(h, x, y)) == -1)
-			return ;
-		h->sprite[i]->life -= 50;
-		if (h->sprite[i]->life <= 0)
+		var_dda_gun(h->sp, x2, h);
+		if (dda_gun(h->sp, h->map, &x, &y))
 		{
-			h->sprite[i]->k = 0;
-			h->map[(int)h->sprite[i]->y][(int)h->sprite[i]->x] = '0';
+			if ((i = search_sprite(h, x, y)) == -1)
+				return ;
+			h->sprite[i]->life -= 50;
+			if (h->sprite[i]->life <= 0)
+			{
+				h->sprite[i]->k = 0;
+				h->map[(int)h->sprite[i]->y][(int)h->sprite[i]->x] = '0';
+			}
+			break ;
 		}
+		x2++;
 	}
 }
