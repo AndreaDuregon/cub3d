@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/17 12:04:45 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 14:12:39 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ void				rendering(char **map, t_var var, int sw);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int					create_trgb(int t, int r, int g, int b);
 t_hook				hook_init(char **map, t_var var, t_spawn spawn,
-								t_vars vars, t_spr sprt);
+								t_vars vars);
 int					set_key(int keycode, t_hook *h);
 t_sprite			**init_spawn(char **map, t_spawn *sp, t_sprite **s);
 int					raycasting(t_hook *h);
@@ -252,5 +252,8 @@ void				set_move3(double *movex, double *movey);
 void				set_move4(double *movex, double *movey);
 void				next_level(t_hook *h);
 int					count_sprite(char **map);
+int					ar_length(char **map);
+char				**minimap_init(char **minimap, char **map);
+void				set_text(t_hook *h, t_var var, t_vars vars);
 
 #endif

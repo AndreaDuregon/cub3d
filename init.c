@@ -3,65 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 17:20:27 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/17 12:04:37 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 14:14:17 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			ar_length(char **map)
-{
-	int i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
-}
-
-char			**minimap_init(char **minimap, char **map)
-{
-	int i;
-
-	i = 0;
-	while (map[i])
-	{
-		if (!(minimap[i] = (char *)malloc((((int)ft_strlen(map[i]) + 1) * sizeof(char)))))
-			exit(0);
-		i++;
-	}
-	minimap[i] = 0;
-	return (minimap);
-}
-
-t_hook			hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt)
+t_hook			hook_init(char **map, t_var var, t_spawn spawn, t_vars vars)
 {
 	t_hook		h;
-	int			width;
-	int			height;
 	t_floceal	flcl;
 
-	h.tex[0] = mlx_xpm_file_to_image(vars.mlx, var.no, &width, &height);
-	h.tex[1] = mlx_xpm_file_to_image(vars.mlx, var.so, &width, &height);
-	h.tex[2] = mlx_xpm_file_to_image(vars.mlx, var.ea, &width, &height);
-	h.tex[3] = mlx_xpm_file_to_image(vars.mlx, var.we, &width, &height);
-	h.tex[4] = mlx_xpm_file_to_image(vars.mlx, var.s, &width, &height);
-	h.tex[5] = mlx_xpm_file_to_image(vars.mlx, "./texture/moquette.xpm", &width, &height);
-	h.tex[6] = mlx_xpm_file_to_image(vars.mlx, "./texture/moldwall.xpm", &width, &height);
-	h.tex[7] = mlx_xpm_file_to_image(vars.mlx, "./texture/gunn_shoot.xpm", &width, &height);
-	h.tex[8] = mlx_xpm_file_to_image(vars.mlx, "./texture/gunn.xpm", &width, &height);
+	set_text(&h, var, vars);
 	h.floceal = &flcl;
 	h.map = map;
 	h.var = var;
 	h.sp = &spawn;
-	h.spr = &sprt;
 	if (!(h.minimap = malloc((ar_length(map) + 1) * sizeof(char *))))
 		exit(0);
 	h.minimap = minimap_init(h.minimap, h.map);
 	h.sp->displayminimap = 0;
+	h.sp->life = 100;
 	return (h);
 }
 

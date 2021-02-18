@@ -25,6 +25,7 @@ SRCS	=	cub3d.c \
 			raycasting3.c \
 			raycasting4.c \
 			init.c \
+			init2.c \
 			sprite.c \
 			sprite2.c \
 			print_map.c \

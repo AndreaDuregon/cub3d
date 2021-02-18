@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:57:41 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/17 12:04:52 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 14:14:58 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ int			check_mov(char c)
 	return (0);
 }
 
+void		hook_init2(t_sprite **s, t_data img, t_vars vars, t_hook *h)
+{
+	t_spr		*sprt;
+
+	if (!(sprt = malloc(sizeof(t_spr))))
+		return ;
+	h->spr = sprt;
+	h->sprite = s;
+	h->img = img;
+	h->vars = vars;
+	h->nsprite = count_sprite(h->map);
+	h->level = 1;
+}
+
 void		rendering(char **map, t_var var, int sw)
 {
 	t_vars		vars;
@@ -39,7 +53,6 @@ void		rendering(char **map, t_var var, int sw)
 	t_spawn		sp;
 	t_hook		h;
 	t_sprite	**s;
-	t_spr		sprt;
 
 	s = NULL;
 	s = init_spawn(map, &sp, s);
@@ -51,13 +64,8 @@ void		rendering(char **map, t_var var, int sw)
 	img.img = mlx_new_image(vars.mlx, var.rx, var.ry);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	h = hook_init(map, var, sp, vars, sprt);
-	h.sprite = s;
-	h.nsprite = count_sprite(h.map);
-	h.img = img;
-	h.vars = vars;
-	h.sp->life = 100;
-	h.level = 1;
+	h = hook_init(map, var, sp, vars);
+	hook_init2(s, img, vars, &h);
 	printf("%d\n", h.nsprite);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_hook(vars.win, 2, 1L << 0, set_key, &h);
