@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 18:53:49 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/10 15:43:34 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 19:22:53 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		side_zero(t_hook *h, int x, int y, int color)
+void		side_zero(t_hook *h, int x, int y)
 {
 	if ((y + h->sp->appo) < h->var.ry && (y + h->sp->appo) > 0)
 	{
@@ -22,7 +22,7 @@ void		side_zero(t_hook *h, int x, int y, int color)
 	}
 }
 
-void		side_one(t_hook *h, int x, int y, int color)
+void		side_one(t_hook *h, int x, int y)
 {
 	if ((y + h->sp->appo) < h->var.ry && (y + h->sp->appo) > 0)
 	{
@@ -32,7 +32,7 @@ void		side_one(t_hook *h, int x, int y, int color)
 	}
 }
 
-void		side_two(t_hook *h, int x, int y, int color)
+void		side_two(t_hook *h, int x, int y)
 {
 	if ((y + h->sp->appo) < h->var.ry && (y + h->sp->appo) > 0)
 	{
@@ -42,7 +42,7 @@ void		side_two(t_hook *h, int x, int y, int color)
 	}
 }
 
-void		side_three(t_hook *h, int x, int y, int color)
+void		side_three(t_hook *h, int x, int y)
 {
 	if ((y + h->sp->appo) < h->var.ry && (y + h->sp->appo) > 0)
 	{
@@ -65,13 +65,13 @@ void		print_wall(t_hook *h, int x)
 		{
 			h->sp->texpos += h->sp->step;
 			if (h->sp->side == 0)
-				side_zero(h, x, y, color);
+				side_zero(h, x, y);
 			else if (h->sp->side == 1)
-				side_one(h, x, y, color);
+				side_one(h, x, y);
 			else if (h->sp->side == 2)
-				side_two(h, x, y, color);
+				side_two(h, x, y);
 			else if (h->sp->side == 3)
-				side_three(h, x, y, color);
+				side_three(h, x, y);
 			y++;
 		}
 	}

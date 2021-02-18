@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 18:37:51 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/18 19:34:10 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,10 +242,8 @@ int					set_key_render(t_hook *h);
 int					check_mov(char c);
 int					unset_key(int keycode, t_hook *h);
 int					set_key(int keycode, t_hook *h);
-void				sprite_var(t_hook *h, int i, int *spr_ord,
-								double *spr_dist);
-void				manage_sprite(t_hook *h, int i, int *spr_ord,
-								double *spr_dist);
+void				sprite_var(t_hook *h, int i, int *spr_ord);
+void				manage_sprite(t_hook *h, int i, int *spr_ord);
 void				random_gen(double *movex, double *movey);
 void				set_move1(double *movex, double *movey);
 void				set_move2(double *movex, double *movey);
@@ -256,7 +254,7 @@ int					count_sprite(char **map);
 int					ar_length(char **map);
 char				**minimap_init(char **minimap, char **map);
 void				set_text(t_hook *h, t_var var, t_vars vars);
-void				buff_free(int x, int y);
+void				buff_free(unsigned int **buff, int y);
 void				slitta_array(t_hook *h, int i);
 void				elimina_morte(t_hook *h);
 void				free_sprite(t_hook *h);

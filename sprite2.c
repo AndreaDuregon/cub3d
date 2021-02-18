@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 09:31:37 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 17:28:38 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 19:25:02 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void		print_sprite(t_hook *h)
 	int y;
 	int	c;
 
+	c = 0;
+	d = 0;
 	while (h->spr->stripe < h->spr->sprdrawendx)
 	{
 		h->spr->texx = (int)(256 * (h->spr->stripe -
@@ -81,7 +83,7 @@ void		next_level(t_hook *h)
 	h->level++;
 }
 
-void		sprite_var(t_hook *h, int i, int *spr_ord, double *spr_dist)
+void		sprite_var(t_hook *h, int i, int *spr_ord)
 {
 	h->spr->spritex = h->sprite[spr_ord[i]]->x - h->sp->posx;
 	h->spr->spritey = h->sprite[spr_ord[i]]->y - h->sp->posy;
@@ -110,9 +112,9 @@ void		sprite_var(t_hook *h, int i, int *spr_ord, double *spr_dist)
 	h->spr->stripe = h->spr->sprdrawstartx;
 }
 
-void		manage_sprite(t_hook *h, int i, int *spr_ord, double *spr_dist)
+void		manage_sprite(t_hook *h, int i, int *spr_ord)
 {
 	h->s_instampa = spr_ord[i];
-	sprite_var(h, i, spr_ord, spr_dist);
+	sprite_var(h, i, spr_ord);
 	print_sprite(h);
 }

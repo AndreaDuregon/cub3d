@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 10:17:34 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/17 10:35:56 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 19:36:08 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int			set_key_render(t_hook *h)
 	double olddirx;
 	double oldplanex;
 
+	olddirx = 0.0;
+	oldplanex = 0.0;
 	set_lr(h->sp, olddirx, oldplanex);
 	set_fb(h);
 	set_sm(h);

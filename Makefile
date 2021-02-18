@@ -1,7 +1,7 @@
 NAME	=	cub3d
 LIBFT	=	./libft/libft.a
 CC		=	gcc
-CFLAGS	=	
+CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f
 LIBS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit -lm
 MLX		=	libmlx.dylib

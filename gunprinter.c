@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 11:37:19 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/02/18 18:39:09 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/18 19:35:09 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	print_level(t_hook *h)
 	x = h->var.rx - 5;
 	y = 15;
 	j = h->level;
+	z = 0;
 	while (j > 0)
 	{
 		x = print_level2(h, y, x, z);

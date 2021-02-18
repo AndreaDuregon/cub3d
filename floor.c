@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   floor.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:15:28 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 15:35:06 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 19:33:33 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void				print_background(t_hook *h, t_var var, t_data img,
+void				print_background(t_hook *h, t_var var,
 							unsigned int **buffer)
 {
 	int x;
@@ -64,7 +64,6 @@ unsigned int		**buff_alloc(int x, int y)
 {
 	unsigned int	**buff;
 	int				i;
-	int				j;
 
 	if (!(buff = ft_calloc((y + 1), sizeof(unsigned int *))))
 		return (NULL);
@@ -76,11 +75,9 @@ unsigned int		**buff_alloc(int x, int y)
 	return (buff);
 }
 
-void				buff_free(int x, int y)
+void				buff_free(unsigned int **buff, int y)
 {
-	unsigned int	**buff;
 	int				i;
-	int				j;
 
 	i = 0;
 	while (i < y)
@@ -107,6 +104,6 @@ void				print_floor(t_hook *h)
 		ft_helper(h, y, buffer, 0);
 		y++;
 	}
-	print_background(h, h->var, h->img, buffer);
-	buff_free(0, h->var.ry);
+	print_background(h, h->var, buffer);
+	buff_free(buffer, h->var.ry);
 }

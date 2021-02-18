@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 12:47:08 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/11 18:59:03 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 19:26:35 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		print_ver(t_data img, t_var var, int fd)
 {
 	int		y;
 	int		x;
-	int		f;
 	int		save;
 
 	y = var.ry - 1;
@@ -37,7 +36,6 @@ void		set_info(t_data img, int fd, t_var var)
 {
 	int info_size;
 	int plane_num;
-	int count;
 	int img_size;
 	int color;
 

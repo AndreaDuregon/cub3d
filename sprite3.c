@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 18:21:43 by forsili           #+#    #+#             */
-/*   Updated: 2021/02/18 18:22:07 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/18 19:26:07 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void		elimina_morte(t_hook *h)
 void		free_sprite(t_hook *h)
 {
 	int i;
-	int k;
 
 	i = 0;
 	while (i < h->nsprite)

@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:22:32 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 18:21:37 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/18 19:25:47 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		reset_sprite(t_hook *h)
 {
 	t_sprite **s;
 
+	s = NULL;
 	free_sprite(h);
 	next_level(h);
 	h->sprite = init_spawn(h->map, h->sp, s);
@@ -67,7 +68,7 @@ void		sprite_calc2(t_hook *h, int *spr_ord, double *spr_dist, int count)
 	i = 0;
 	while (i < count)
 	{
-		manage_sprite(h, i, spr_ord, spr_dist);
+		manage_sprite(h, i, spr_ord);
 		i++;
 	}
 }
