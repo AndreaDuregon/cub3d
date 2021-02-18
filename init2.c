@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 14:04:18 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/02/18 14:05:09 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 17:27:44 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ void			set_text(t_hook *h, t_var var, t_vars vars)
 	h->tex[7] = mlx_xpm_file_to_image(vars.mlx, "./texture/gunn_shoot.xpm",
 														&width, &height);
 	h->tex[8] = mlx_xpm_file_to_image(vars.mlx, "./texture/gunn.xpm",
+														&width, &height);
+	h->tex[9] = mlx_xpm_file_to_image(vars.mlx, "./texture/zombic.xpm",
 														&width, &height);
 }

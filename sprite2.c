@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 09:31:37 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/17 11:05:51 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 17:28:38 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 int			print_stripe(t_hook *h, int d, int y, int c)
 {
+	int n;
+
+	n = 4;
+	if (h->sprite[h->s_instampa]->life < 100)
+		n = 9;
 	d = (y) * 256 - h->var.ry * 128 + h->spr->sprheight * 128;
 	h->spr->texy = ((d * 64) / h->spr->sprheight) / 256;
-	c = ((unsigned int *)(h->tex[4]->buff))[(int)(h->tex[4]->height
+	c = ((unsigned int *)(h->tex[n]->buff))[(int)(h->tex[n]->height
 									* h->spr->texy + h->spr->texx)];
 	if (c != 13491257)
 	{
@@ -107,6 +112,7 @@ void		sprite_var(t_hook *h, int i, int *spr_ord, double *spr_dist)
 
 void		manage_sprite(t_hook *h, int i, int *spr_ord, double *spr_dist)
 {
+	h->s_instampa = spr_ord[i];
 	sprite_var(h, i, spr_ord, spr_dist);
 	print_sprite(h);
 }

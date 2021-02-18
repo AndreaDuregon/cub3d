@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 15:34:28 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 17:25:25 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ typedef struct		s_hook
 	t_floceal		*floceal;
 	int				level;
 	int				nsprite;
+	int				s_instampa;
 }					t_hook;
 
 int					ar_length(char **map);
