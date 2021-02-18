@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:15:28 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/17 09:54:25 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:35:06 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,21 @@ unsigned int		**buff_alloc(int x, int y)
 	return (buff);
 }
 
+void				buff_free(int x, int y)
+{
+	unsigned int	**buff;
+	int				i;
+	int				j;
+
+	i = 0;
+	while (i < y)
+	{
+		free(buff[i]);
+		i++;
+	}
+	free(buff);
+}
+
 void				print_floor(t_hook *h)
 {
 	int				y;
@@ -93,4 +108,5 @@ void				print_floor(t_hook *h)
 		y++;
 	}
 	print_background(h, h->var, h->img, buffer);
+	buff_free(0, h->var.ry);
 }

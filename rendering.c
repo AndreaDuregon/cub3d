@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:57:41 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 14:14:58 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 14:41:55 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,9 @@ void		rendering(char **map, t_var var, int sw)
 								&img.endian);
 	h = hook_init(map, var, sp, vars);
 	hook_init2(s, img, vars, &h);
-	printf("%d\n", h.nsprite);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_hook(vars.win, 2, 1L << 0, set_key, &h);
 	mlx_hook(vars.win, 3, 1L << 1, unset_key, &h);
 	mlx_loop_hook(vars.mlx, set_key_render, &h);
 	mlx_loop(vars.mlx);
-	map = NULL;
 }

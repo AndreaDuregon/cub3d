@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:49:31 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/02 10:21:10 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:28:18 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ int			take_line(t_list **lst, int fd)
 	{
 		ret = get_next_line(fd, &line);
 		if (line[0] == 0 && flag == 0)
+		{
+			free(line);
 			continue ;
+		}
 		flag = 1;
 		i++;
 		ft_lstadd_back_mod(lst, line);

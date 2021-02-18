@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 14:12:39 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 15:34:28 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,5 +255,6 @@ int					count_sprite(char **map);
 int					ar_length(char **map);
 char				**minimap_init(char **minimap, char **map);
 void				set_text(t_hook *h, t_var var, t_vars vars);
+void				buff_free(int x, int y);
 
 #endif

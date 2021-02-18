@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 09:22:32 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/17 11:06:24 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 14:31:43 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void		reset_sprite(t_hook *h)
 
 	free_sprite(h);
 	next_level(h);
-	h->sprite = init_spawn(h->map, h->sp, s);	
+	h->sprite = init_spawn(h->map, h->sp, s);
 }
 
 void		sprite_calc(t_hook *h)
@@ -135,4 +135,6 @@ void		sprite_calc(t_hook *h)
 		manage_sprite(h, i, spr_ord, spr_dist);
 		i++;
 	}
+	free(spr_ord);
+	free(spr_dist);
 }

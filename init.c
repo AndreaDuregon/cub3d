@@ -6,7 +6,7 @@
 /*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 17:20:27 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 14:14:17 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/18 14:32:22 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			set_pos(char **map, t_spawn *sp, int i[3])
 
 int				set_sprite(t_sprite **s, int i[3], int count)
 {
-	if (!(s[i[2]] = malloc(sizeof(t_sprite) * (1000 + 1))))
+	if (!(s[i[2]] = malloc(sizeof(t_sprite) * (count + 1))))
 		return (0);
 	s[i[2]]->x = (double)i[1] + 0.5;
 	s[i[2]]->y = (double)i[0] + 0.5;
@@ -79,7 +79,7 @@ t_sprite		**init_spawn(char **map, t_spawn *sp, t_sprite **s)
 	int count;
 
 	count = count_sprite(map);
-	if (!(s = malloc(sizeof(t_sprite *) * (1000 + 1))))
+	if (!(s = malloc(sizeof(t_sprite *) * (count + 1))))
 		return (NULL);
 	i[0] = 0;
 	i[2] = 0;
