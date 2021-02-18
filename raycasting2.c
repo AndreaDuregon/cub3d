@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 18:50:51 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/17 10:01:05 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/18 12:41:10 by sgiovo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void		height_calc(t_spawn *sp, t_var var)
 {
 	sp->lineheight = (int)(var.ry / sp->perpwalldist);
 	sp->drawstart = -sp->lineheight / 2 + var.ry / 2;
-	if (sp->drawstart < 0)
-		sp->drawstart = 0;
+	if (sp->drawstart < 0 - sp->appo)
+		sp->drawstart = 0 - sp->appo;
 	sp->drawend = sp->lineheight / 2 + var.ry / 2;
-	if (sp->drawend >= var.ry)
-		sp->drawend = var.ry;
+	if (sp->drawend >= var.ry - sp->appo)
+		sp->drawend = var.ry - sp->appo;
 }
 
 void		set_speed(t_spawn *sp)
