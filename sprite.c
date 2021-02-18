@@ -69,10 +69,38 @@ void		elimina_morte(t_hook *h)
 	while (h->sprite[i])
 	{
 		if (!h->sprite[i]->life)
+		{
 			slitta_array(h, i);
+			h->sp->life += 2;
+			if (h->sp->life > 100)
+				h->sp->life = 100;
+		}
 		if (h->sprite[i])
 			i++;
 	}
+}
+
+void		free_sprite(t_hook *h)
+{
+	int i;
+	int k;
+
+	i = 0;
+	while (i < h->nsprite)
+	{
+		free(h->sprite[i]);
+		i++;
+	}
+	free(h->sprite);
+}
+
+void		reset_sprite(t_hook *h)
+{
+	t_sprite **s;
+
+	free_sprite(h);
+	next_level(h);
+	h->sprite = init_spawn(h->map, h->sp, s);	
 }
 
 void		sprite_calc(t_hook *h)
@@ -87,6 +115,11 @@ void		sprite_calc(t_hook *h)
 	while (h->sprite[i])
 		i++;
 	count = i;
+	if (!count)
+	{
+		reset_sprite(h);
+		return ;
+	}
 	if (!(spr_ord = malloc(sizeof(int) * (count + 1))) ||
 		!(spr_dist = malloc(sizeof(double) * (count + 1))))
 		return ;

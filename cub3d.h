@@ -171,6 +171,7 @@ typedef struct		s_hook
 	char			**minimap;
 	t_floceal		*floceal;
 	int				level;
+	int				nsprite;
 }					t_hook;
 
 int					ar_length(char **map);

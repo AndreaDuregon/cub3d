@@ -63,9 +63,12 @@ void		next_level(t_hook *h)
 		{
 			if (h->map[i][k] == '0')
 			{
-				if ((rand() % 1000) <= (h->level))
+				if ((rand() % 800) <= (h->level))
 					h->map[i][k] = '2';
 			}
+			if (h->map[i][k] == 'N' || h->map[i][k] == 'S'
+				|| h->map[i][k] == 'E' || h->map[i][k] == 'W')
+				h->map[i][k] = '0';
 			k++;
 		}
 		i++;

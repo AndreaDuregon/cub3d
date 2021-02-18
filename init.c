@@ -51,7 +51,7 @@ t_hook			hook_init(char **map, t_var var, t_spawn spawn, t_vars vars, t_spr sprt
 	h.tex[4] = mlx_xpm_file_to_image(vars.mlx, var.s, &width, &height);
 	h.tex[5] = mlx_xpm_file_to_image(vars.mlx, "./texture/moquette.xpm", &width, &height);
 	h.tex[6] = mlx_xpm_file_to_image(vars.mlx, "./texture/moldwall.xpm", &width, &height);
-	h.tex[7] = mlx_xpm_file_to_image(vars.mlx, "./texture/guns.xpm", &width, &height);
+	h.tex[7] = mlx_xpm_file_to_image(vars.mlx, "./texture/gunn_shoot.xpm", &width, &height);
 	h.tex[8] = mlx_xpm_file_to_image(vars.mlx, "./texture/gunn.xpm", &width, &height);
 	h.floceal = &flcl;
 	h.map = map;
@@ -96,7 +96,7 @@ void			set_pos(char **map, t_spawn *sp, int i[3])
 
 int				set_sprite(t_sprite **s, int i[3], int count)
 {
-	if (!(s[i[2]] = malloc(sizeof(t_sprite) * (count + 1))))
+	if (!(s[i[2]] = malloc(sizeof(t_sprite) * (1000 + 1))))
 		return (0);
 	s[i[2]]->x = (double)i[1] + 0.5;
 	s[i[2]]->y = (double)i[0] + 0.5;
@@ -114,7 +114,7 @@ t_sprite		**init_spawn(char **map, t_spawn *sp, t_sprite **s)
 	int count;
 
 	count = count_sprite(map);
-	if (!(s = malloc(sizeof(t_sprite *) * (count + 1))))
+	if (!(s = malloc(sizeof(t_sprite *) * (1000 + 1))))
 		return (NULL);
 	i[0] = 0;
 	i[2] = 0;

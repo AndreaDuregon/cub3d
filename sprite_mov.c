@@ -38,11 +38,15 @@ int		check_pos_wall(t_sprite *spr, t_hook *h, double movex, double movey)
 	double sicx;
 	double sicy;
 
-	sicy = 0.1;
-	sicx = 0.1;
+	sicy = 0.5;
+	sicx = 0.5;
 	if (h->map[(int)(spr->y + movey)][(int)(spr->x + movex)] == '1')
 		return (0);
-	while (sicx < 0.9)
+	if (h->map[(int)(spr->y + movey + sicy)][(int)(spr->x + movex)] == '1')
+		return (0);
+	if (h->map[(int)(spr->y + movey)][(int)(spr->x + movex + sicx)] == '1')
+		return (0);
+	/*while (sicx < 0.9)
 	{
 		while (sicy < 0.9)
 		{
@@ -59,7 +63,7 @@ int		check_pos_wall(t_sprite *spr, t_hook *h, double movex, double movey)
 			sicy += 0.1;
 		}
 		sicx += 0.1;
-	}
+	}*/
 	return (1);
 
 }
