@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 15:36:33 by aduregon          #+#    #+#             */
-/*   Updated: 2021/01/31 12:50:44 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/19 14:47:18 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,24 @@ int			check_rule(char *reg)
 	return (1);
 }
 
-void		parse_rule(char **line, char **reg, t_var *var)
+void		parse_rule(char **line, char **reg, t_var **var)
 {
 	if ((*line)[0] == 'N' && (*line)[1] == 'O' && (*line)[2] == ' ')
-		parse_template_no(*line, *reg, var);
+		parse_template_no(*line, *reg, *var);
 	else if ((*line)[0] == 'S' && (*line)[1] == 'O' && (*line)[2] == ' ')
-		parse_template_so(*line, *reg, var);
+		parse_template_so(*line, *reg, *var);
 	else if ((*line)[0] == 'W' && (*line)[1] == 'E' && (*line)[2] == ' ')
-		parse_template_we(*line, *reg, var);
+		parse_template_we(*line, *reg, *var);
 	else if ((*line)[0] == 'E' && (*line)[1] == 'A' && (*line)[2] == ' ')
-		parse_template_ea(*line, *reg, var);
+		parse_template_ea(*line, *reg, *var);
 	else if ((*line)[0] == 'R' && (*line)[1] == ' ')
-		parse_value(*line, *reg, var);
+		parse_value(*line, *reg, *var);
 	else if ((*line)[0] == 'S' && (*line)[1] == ' ')
-		parse_template_s(*line, *reg, var);
+		parse_template_s(*line, *reg, *var);
 	else if ((*line)[0] == 'F' && (*line)[1] == ' ')
-		parse_rgb_f(*line, *reg, var);
+		parse_f(*line, *reg, &(*var));
 	else if ((*line)[0] == 'C' && (*line)[1] == ' ')
-		parse_rgb_c(*line, *reg, var);
+		parse_c(*line, *reg, &(*var));
 	else if ((*line)[0] == 0)
 	{
 	}
@@ -79,9 +79,11 @@ void		var_parsing(int fd, t_var *var)
 	while (!check_rule(reg) && ret > 0)
 	{
 		ret = get_next_line(fd, &line);
-		parse_rule(&line, &reg, var);
+		parse_rule(&line, &reg, &var);
 		free(line);
 	}
+	if (var->swc != var->swf)
+		floceal_err(reg);
 	if (!check_rule(reg))
 		miss_rule_err(reg);
 	free(reg);

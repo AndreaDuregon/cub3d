@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgiovo <sgiovo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 19:01:19 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 15:30:47 by sgiovo           ###   ########.fr       */
+/*   Updated: 2021/02/19 15:38:32 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ void		raycasting2(t_hook *h)
 	}
 }
 
+void		manage_bg(t_hook *h)
+{
+	if (h->var.swf && h->var.swc)
+		print_floor(h);
+	else
+		print_flrgb(h);
+}
+
 int			raycasting(t_hook *h)
 {
 	int x;
@@ -63,7 +71,7 @@ int			raycasting(t_hook *h)
 	h->img.img = mlx_new_image(h->vars.mlx, h->var.rx, h->var.ry);
 	h->img.addr = mlx_get_data_addr(h->img.img, &h->img.bits_per_pixel,
 									&h->img.line_length, &h->img.endian);
-	print_floor(h);
+	manage_bg(h);
 	x = 0;
 	while (x < h->var.rx)
 	{

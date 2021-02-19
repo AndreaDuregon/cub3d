@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 19:34:10 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/19 15:35:03 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct		s_var
 	char			*fpat;
 	int				c[3];
 	char			*cpat;
+	int				swf;
+	int				swc;
 }					t_var;
 
 typedef struct		s_spawn
@@ -205,6 +207,7 @@ void				exist_rule_err(char *line, char *reg);
 void				forb_rule_err(char *line, char *reg);
 void				exist_file_err(void);
 void				name_file_err(char *str);
+void				floceal_err(char *reg);
 void				invalid_map_err(char **map);
 void				rendering(char **map, t_var var, int sw);
 void				my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -264,5 +267,13 @@ void				set_life_sprite(t_hook *h, int i);
 int					resizer(t_hook *h, int mod);
 int					print_gameover(t_hook *h);
 void				print_level(t_hook *h);
+void				parse_f(char *line, char *reg, t_var **var);
+void				parse_c(char *line, char *reg, t_var **var);
+unsigned int		**buff_alloc(int x, int y);
+void				print_flrgb(t_hook *h);
+void				insert_rgb_c(char *temp, t_var *var);
+int					is_comma(char c, int i, char *line, char *reg);
+void				insert_rgb_f(char *temp, t_var *var);
+void				parse_rgb_c(char *line, char *reg, t_var *var);
 
 #endif

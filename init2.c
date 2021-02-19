@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 14:04:18 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/02/18 18:12:08 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/19 15:05:46 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,13 @@ void			set_text(t_hook *h, t_var var, t_vars vars)
 	h->tex[2] = mlx_xpm_file_to_image(vars.mlx, var.ea, &width, &height);
 	h->tex[3] = mlx_xpm_file_to_image(vars.mlx, var.we, &width, &height);
 	h->tex[4] = mlx_xpm_file_to_image(vars.mlx, var.s, &width, &height);
-	h->tex[5] = mlx_xpm_file_to_image(vars.mlx, "./texture/moquette.xpm",
+	if (var.swf && var.swc)
+	{
+		h->tex[5] = mlx_xpm_file_to_image(vars.mlx, var.fpat,
 														&width, &height);
-	h->tex[6] = mlx_xpm_file_to_image(vars.mlx, "./texture/moldwall.xpm",
+		h->tex[6] = mlx_xpm_file_to_image(vars.mlx, var.cpat,
 														&width, &height);
+	}
 	h->tex[7] = mlx_xpm_file_to_image(vars.mlx, "./texture/gunn_shoot.xpm",
 														&width, &height);
 	h->tex[8] = mlx_xpm_file_to_image(vars.mlx, "./texture/gunn.xpm",

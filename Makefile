@@ -14,7 +14,9 @@ SRCS	=	cub3d.c \
 			parse_rule.c \
 			parse_rule2.c \
 			parse_rule3.c \
+			parse_rule4.c \
 			print_error.c \
+			print_error2.c \
 			var_parsing.c \
 			check_file.c \
 			rendering.c \

@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 12:00:24 by aduregon          #+#    #+#             */
-/*   Updated: 2021/01/31 19:31:43 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/19 15:36:37 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	format_rule_err(char *line, char *reg)
-{
-	perror("Error\nWrong rules format");
-	free(line);
-	free(reg);
-	exit(0);
-}
 
 void	miss_rule_err(char *reg)
 {
@@ -47,5 +39,12 @@ void	invalid_map_err(char **map)
 {
 	perror("Error\nInvalid Map");
 	free(map);
+	exit(0);
+}
+
+void	floceal_err(char *reg)
+{
+	perror("Error\nYou can't manage floor and ceiling in different mode");
+	free(reg);
 	exit(0);
 }
