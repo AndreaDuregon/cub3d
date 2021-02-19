@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:17:50 by aduregon          #+#    #+#             */
-/*   Updated: 2021/01/27 14:44:09 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/19 17:17:52 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			manage_map(char **map)
 		while (map[size][j] != 0)
 		{
 			if (map[size][j] == 32)
-				map[size][j] = 49;
+				map[size][j] = 32;
 			j++;
 		}
 		size++;
@@ -39,6 +39,12 @@ int			valid_char_no_one(char c)
 }
 
 int			valid_char(char c)
+{
+	return (c == '0' || c == '1' || c == '2' || c == 'N' ||
+			c == 'E' || c == 'S' || c == 'W' || c == ' ');
+}
+
+int			valid_char2(char c)
 {
 	return (c == '0' || c == '1' || c == '2' || c == 'N' ||
 			c == 'E' || c == 'S' || c == 'W');

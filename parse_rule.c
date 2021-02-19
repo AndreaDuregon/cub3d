@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rule.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 23:24:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/01/31 12:38:59 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/19 16:15:05 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void		parse_template_no(char *line, char *reg, t_var *var)
 		reg[1] = '1';
 	else
 		exist_rule_err(line, reg);
+	temp = ft_strrchr(var->no, '.');
+	if (temp[4] != 0 || (!ft_strnstr(var->no, ".xpm", ft_strlen(var->no))))
+		extension_err(line, reg);
 }
 
 void		parse_template_so(char *line, char *reg, t_var *var)
@@ -48,6 +51,9 @@ void		parse_template_so(char *line, char *reg, t_var *var)
 		reg[2] = '1';
 	else
 		exist_rule_err(line, reg);
+	temp = ft_strrchr(var->so, '.');
+	if (temp[4] != 0 || (!ft_strnstr(var->so, ".xpm", ft_strlen(var->so))))
+		extension_err(line, reg);
 }
 
 void		parse_template_we(char *line, char *reg, t_var *var)
@@ -66,6 +72,9 @@ void		parse_template_we(char *line, char *reg, t_var *var)
 		reg[3] = '1';
 	else
 		exist_rule_err(line, reg);
+	temp = ft_strrchr(var->we, '.');
+	if (temp[4] != 0 || (!ft_strnstr(var->we, ".xpm", ft_strlen(var->we))))
+		extension_err(line, reg);
 }
 
 void		parse_template_ea(char *line, char *reg, t_var *var)
@@ -84,6 +93,9 @@ void		parse_template_ea(char *line, char *reg, t_var *var)
 		reg[4] = '1';
 	else
 		exist_rule_err(line, reg);
+	temp = ft_strrchr(var->ea, '.');
+	if (temp[4] != 0 || (!ft_strnstr(var->ea, ".xpm", ft_strlen(var->ea))))
+		extension_err(line, reg);
 }
 
 void		parse_template_s(char *line, char *reg, t_var *var)
@@ -102,4 +114,7 @@ void		parse_template_s(char *line, char *reg, t_var *var)
 		reg[5] = '1';
 	else
 		exist_rule_err(line, reg);
+	temp = ft_strrchr(var->s, '.');
+	if (temp[4] != 0 || (!ft_strnstr(var->s, ".xpm", ft_strlen(var->s))))
+		extension_err(line, reg);
 }

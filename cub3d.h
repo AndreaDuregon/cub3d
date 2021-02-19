@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/19 15:35:03 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/19 17:03:12 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,5 +275,7 @@ void				insert_rgb_c(char *temp, t_var *var);
 int					is_comma(char c, int i, char *line, char *reg);
 void				insert_rgb_f(char *temp, t_var *var);
 void				parse_rgb_c(char *line, char *reg, t_var *var);
+void				extension_err(char *line, char *reg);
+int					valid_char2(char c);
 
 #endif

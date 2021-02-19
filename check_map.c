@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 17:40:21 by aduregon          #+#    #+#             */
-/*   Updated: 2021/01/31 19:31:28 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/19 17:18:17 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int		check_check(char **map, int i, int j)
 	if (valid_char_no_one(map[i][j]))
 	{
 		if ((int)ft_strlen(map[i - 1]) < j)
-		{
 			return (0);
-		}
 		if ((int)ft_strlen(map[i + 1]) < j)
 			return (0);
-		if (!valid_char(map[i + 1][j]) || !valid_char(map[i - 1][j]) ||
-			!valid_char(map[i][j + 1]) || !valid_char(map[i][j - 1]))
+		if (j == 0 || j == (int)ft_strlen(map[i]))
+			return (0);
+		if (!valid_char2(map[i + 1][j]) || !valid_char2(map[i - 1][j]) ||
+			!valid_char2(map[i][j + 1]) || !valid_char2(map[i][j - 1]))
 			return (0);
 	}
 	return (1);
@@ -55,12 +55,18 @@ int		check_line(char **map, size_t size)
 
 	i = 0;
 	while (map[0][i])
-		if (map[0][i++] != 49)
+	{
+		if (map[0][i] != ' ' && map[0][i] != '1')
 			return (0);
+		i++;
+	}
 	i = 0;
 	while (map[size][i])
-		if (map[size][i++] != 49)
+	{
+		if (map[size][i] != 49 && map[size][i] != ' ')
 			return (0);
+		i++;
+	}
 	if (!check_diagonal(map, size))
 		return (0);
 	else
@@ -80,7 +86,7 @@ int		check_char(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (!valid_char(map[i][j]) && !ft_isspace(map[i][j]))
+			if (!valid_char(map[i][j]))
 				return (0);
 			if (flag == 0 && is_char(map[i][j]))
 				flag = 1;

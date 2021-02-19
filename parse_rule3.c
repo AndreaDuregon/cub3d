@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:54:51 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 18:15:22 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/19 17:51:45 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void		insert_value(char *temp, t_var *var)
 	free(values[0]);
 	free(values[1]);
 	free(values);
+	if (var->ry > 1395)
+		var->ry = 1395;
+	if (var->rx > 2560)
+		var->rx = 2560;
 }
 
 void		parse_value(char *line, char *reg, t_var *var)

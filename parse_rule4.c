@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:33:18 by forsili           #+#    #+#             */
-/*   Updated: 2021/02/19 15:33:45 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/19 17:24:27 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void		insert_rgb_c(char *temp, t_var *var)
 	free(values[1]);
 	free(values[2]);
 	free(values);
+	if (var->c[0] > 255 || var->c[1] > 255 || var->c[2] > 255)
+	{
+		printf("Error\nNot RGB value\n");
+		exit(0);
+	}
 }
 
 int			is_comma(char c, int i, char *line, char *reg)
@@ -76,4 +81,9 @@ void		insert_rgb_f(char *temp, t_var *var)
 	free(values[1]);
 	free(values[2]);
 	free(values);
+	if (var->f[0] > 255 || var->f[1] > 255 || var->f[2] > 255)
+	{
+		printf("Error\nNot RGB value\n");
+		exit(0);
+	}
 }

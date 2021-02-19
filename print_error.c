@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 12:00:24 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/19 15:36:37 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/19 17:40:01 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	miss_rule_err(char *reg)
 {
-	perror("Error\nMissing rules");
+	printf("Error\nMissing rules\n");
 	free(reg);
 	exit(0);
 }
 
 void	exist_rule_err(char *line, char *reg)
 {
-	perror("Error\nRule already exists");
+	printf("Error\nRule already exists\n");
 	free(line);
 	free(reg);
 	exit(0);
@@ -29,7 +29,7 @@ void	exist_rule_err(char *line, char *reg)
 
 void	forb_rule_err(char *line, char *reg)
 {
-	perror("Error\nRule forbidden");
+	printf("Error\nRule forbidden\n");
 	free(line);
 	free(reg);
 	exit(0);
@@ -37,14 +37,14 @@ void	forb_rule_err(char *line, char *reg)
 
 void	invalid_map_err(char **map)
 {
-	perror("Error\nInvalid Map");
+	printf("Error\nInvalid Map\n");
 	free(map);
 	exit(0);
 }
 
 void	floceal_err(char *reg)
 {
-	perror("Error\nYou can't manage floor and ceiling in different mode");
+	printf("Error\nYou can't manage floor and ceiling in different mode\n");
 	free(reg);
 	exit(0);
 }

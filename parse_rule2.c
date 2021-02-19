@@ -6,7 +6,7 @@
 /*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 16:51:31 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/19 15:33:51 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/19 16:15:41 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ void		parse_template_c(char *line, char *reg, t_var *var)
 		reg[7] = '1';
 	else
 		exist_rule_err(line, reg);
+	temp = ft_strrchr(var->cpat, '.');
+	if (temp[4] != 0 || (!ft_strnstr(var->cpat, ".xpm", ft_strlen(var->cpat))))
+		extension_err(line, reg);
 }
 
 void		parse_c(char *line, char *reg, t_var **var)
@@ -100,6 +103,9 @@ void		parse_template_f(char *line, char *reg, t_var *var)
 		reg[6] = '1';
 	else
 		exist_rule_err(line, reg);
+	temp = ft_strrchr(var->fpat, '.');
+	if (temp[4] != 0 || (!ft_strnstr(var->fpat, ".xpm", ft_strlen(var->fpat))))
+		extension_err(line, reg);
 }
 
 void		parse_f(char *line, char *reg, t_var **var)
