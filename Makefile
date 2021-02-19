@@ -41,7 +41,8 @@ SRCS	=	cub3d.c \
 			gunprinter.c \
 			gunprinter2.c \
 			set_key.c \
-			key_press.c
+			key_press.c \
+			gameover.c \
 
 OBJ		=	$(SRCS:.c=.o)
 

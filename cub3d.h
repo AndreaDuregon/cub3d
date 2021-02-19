@@ -260,5 +260,9 @@ void				elimina_morte(t_hook *h);
 void				free_sprite(t_hook *h);
 void				mirino(t_hook *h);
 void				print_life(t_hook *h);
+void				set_life_sprite(t_hook *h, int i);
+int					resizer(t_hook *h, int mod);
+int					print_gameover(t_hook *h);
+void				print_level(t_hook *h);
 
 #endif

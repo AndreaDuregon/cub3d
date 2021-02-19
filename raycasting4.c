@@ -21,8 +21,7 @@ void		call_func(t_hook *h, int x)
 	height_calc(h->sp, h->var);
 	tex_coord(h->sp, h->var);
 	print_wall(h, x);
-	if (!h->sp->sprint)
-		set_speed(h->sp);
+	set_speed(h->sp);
 }
 
 void		ft_save_img(char *img, t_hook *h)
@@ -53,8 +52,7 @@ void		raycasting2(t_hook *h)
 		printmap(h);
 	if (h->sp->life <= 0)
 	{
-		printf("gameover\n");
-		exit(0);
+		print_gameover(h);
 	}
 }
 

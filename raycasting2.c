@@ -35,8 +35,21 @@ void		height_calc(t_spawn *sp, t_var var)
 
 void		set_speed(t_spawn *sp)
 {
-	sp->movspeed = 0.07;
-	sp->rotspeed = 0.09;
+	if (sp->sprint && sp->jump != -1)
+	{
+		sp->movspeed = 0.13;
+		sp->rotspeed = 0.09;
+	}
+	else if (sp->jump == -1)
+	{
+		sp->movspeed = 0.03;
+		sp->rotspeed = 0.02;
+	}
+	else
+	{
+		sp->movspeed = 0.07;
+		sp->rotspeed = 0.09;
+	}
 }
 
 void		draw_dot(t_hook *h, int x, int y, int color)

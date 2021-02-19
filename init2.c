@@ -58,4 +58,6 @@ void			set_text(t_hook *h, t_var var, t_vars vars)
 														&width, &height);
 	h->tex[9] = mlx_xpm_file_to_image(vars.mlx, "./texture/zombic.xpm",
 														&width, &height);
+	h->tex[10] = mlx_xpm_file_to_image(vars.mlx, "./texture/gameover.xpm",
+														&width, &height);
 }

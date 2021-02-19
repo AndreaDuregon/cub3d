@@ -31,3 +31,11 @@ void		guny(t_spawn *sp)
 	else if (sp->stepx == -1)
 		sp->side = 2;
 }
+
+void		set_life_sprite(t_hook *h, int i)
+{
+	if (h->sp->jump > 0)
+		h->sprite[i]->life = 0;
+	else
+		h->sprite[i]->life -= 50;
+}
