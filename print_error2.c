@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:36:16 by forsili           #+#    #+#             */
-/*   Updated: 2021/02/19 17:38:15 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/20 12:08:43 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,11 @@ void	extension_err(char *line, char *reg)
 	printf("Error\nNot valid texture extension\n");
 	free(line);
 	free(reg);
+	exit(0);
+}
+
+void	file_err(void)
+{
+	printf("Error\nFile doesn't exist\n");
 	exit(0);
 }

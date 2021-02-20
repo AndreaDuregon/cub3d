@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/19 17:03:12 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/20 12:07:53 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ int					print_stripe(t_hook *h, int d, int y, int c);
 void				print_sprite(t_hook *h);
 void				set_dir(t_spawn *sp, char c);
 void				movement_sprite(t_hook *h);
-void				screenshot(t_data img, t_var var);
+void				screenshot(t_data img, t_var var, t_hook *h);
 void				print_floor(t_hook *h);
 void				shoot(t_hook *h);
 void				gunprinter(t_hook *h);
@@ -277,5 +277,9 @@ void				insert_rgb_f(char *temp, t_var *var);
 void				parse_rgb_c(char *line, char *reg, t_var *var);
 void				extension_err(char *line, char *reg);
 int					valid_char2(char c);
+void				file_err(void);
+void				free_all(t_hook *h);
+void				free_tex(t_hook *h);
+void				free_sc(t_hook *h);
 
 #endif

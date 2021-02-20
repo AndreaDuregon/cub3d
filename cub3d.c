@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:48:36 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/19 14:48:52 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/20 12:12:35 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ int			main(int argc, char **argv)
 		exist_file_err();
 	if (argc == 3 && ft_strnstr(argv[2], "--save", 6))
 		sw = 1;
+	else if (argc == 3)
+		exist_file_err();
 	name_file_err(argv[1]);
 	var = var_init();
 	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		file_err();
 	var_parsing(fd, &var);
 	map = map_parsing(fd);
 	rendering(map, var, sw);

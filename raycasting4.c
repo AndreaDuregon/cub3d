@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 19:01:19 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/19 15:38:32 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/20 12:04:31 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int			raycasting(t_hook *h)
 	sprite_calc(h);
 	if (h->sp->sw == 1)
 	{
-		screenshot(h->img, h->var);
+		screenshot(h->img, h->var, h);
 		h->sp->sw = 0;
 	}
 	raycasting2(h);

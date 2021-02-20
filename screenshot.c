@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 12:47:08 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/18 19:26:35 by forsili          ###   ########.fr       */
+/*   Updated: 2021/02/20 12:07:33 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		set_info(t_data img, int fd, t_var var)
 	write(fd, &color, 4);
 }
 
-void		screenshot(t_data img, t_var var)
+void		screenshot(t_data img, t_var var, t_hook *h)
 {
 	int fd;
 	int file_size;
@@ -72,4 +72,6 @@ void		screenshot(t_data img, t_var var)
 	set_info(img, fd, var);
 	print_ver(img, var, fd);
 	close(fd);
+	free_sc(h);
+	exit(0);
 }

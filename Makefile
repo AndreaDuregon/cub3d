@@ -45,6 +45,7 @@ SRCS	=	cub3d.c \
 			set_key.c \
 			key_press.c \
 			gameover.c \
+			free.c
 
 OBJ		=	$(SRCS:.c=.o)
 
