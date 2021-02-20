@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 12:08:12 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/20 12:08:45 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/20 12:40:10 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	free_all(t_hook *h)
 	i = 0;
 	while (h->minimap[i])
 		free(h->minimap[i++]);
-	free(h->floceal);
 }
 
 void	free_sc(t_hook *h)

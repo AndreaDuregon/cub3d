@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 10:37:52 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/19 17:58:02 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/20 12:38:28 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,18 @@ int			unset_key(int keycode, t_hook *h)
 	return (0);
 }
 
-int			set_key(int keycode, t_hook *h)
+void		key_exit(int keycode, t_hook *h)
 {
 	if (keycode == 53)
+	{
+		free_all(h);
 		exit(0);
+	}
+}
+
+int			set_key(int keycode, t_hook *h)
+{
+	key_exit(keycode, h);
 	if (keycode == 123)
 		h->sp->lr = 1;
 	if (keycode == 124)
@@ -65,4 +73,10 @@ int			set_key(int keycode, t_hook *h)
 	if (keycode == 126)
 		h->sp->shoot = 1;
 	return (0);
+}
+
+int			close_win(t_hook *h)
+{
+	free_all(h);
+	exit(0);
 }

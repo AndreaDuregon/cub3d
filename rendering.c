@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:57:41 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/20 11:43:20 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/20 12:34:06 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		rendering(char **map, t_var var, int sw)
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_hook(vars.win, 2, 1L << 0, set_key, &h);
 	mlx_hook(vars.win, 3, 1L << 1, unset_key, &h);
+	mlx_hook(vars.win, 17, 0, close_win, &h);
 	mlx_loop_hook(vars.mlx, set_key_render, &h);
 	mlx_loop(vars.mlx);
 	free_all(&h);

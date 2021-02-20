@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 09:46:42 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/20 12:07:53 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/20 12:33:58 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,5 +281,6 @@ void				file_err(void);
 void				free_all(t_hook *h);
 void				free_tex(t_hook *h);
 void				free_sc(t_hook *h);
+int					close_win();
 
 #endif
