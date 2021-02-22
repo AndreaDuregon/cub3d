@@ -1,8 +1,8 @@
-R 1200 700
+R 900 500
 NO ./texture/wallbrick.xpm
 SO ./texture/wallbrick2.xpm
 WE ./texture/wallbrick2.xpm
-EA ./texture/tron1.xpm
+EA ./texture/wallbrick2.xpm
 S ./texture/zombib.xpm
 F ./texture/moquette.xpm
 C       ./texture/moldwall.xpm

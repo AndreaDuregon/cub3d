@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 18:50:51 by aduregon          #+#    #+#             */
-/*   Updated: 2021/02/19 17:58:55 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/22 15:24:18 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void		draw_dot(t_hook *h, int x, int y, int color)
 	h->img.addr[i] = b;
 	h->img.addr[i + 1] = g;
 	h->img.addr[i + 2] = r;
+	h->img.addr[i + 3] = 200 - (h->sp->life * 2);
 }
 
 int			getcolor(t_tex *tex, int x, int y, int fade)

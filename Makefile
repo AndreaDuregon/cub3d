@@ -62,6 +62,8 @@ $(MLX)	:
 
 all		:	$(NAME)
 
+bonus	:	all
+
 clean	:
 			make -C mlx clean
 			$(RM) $(OBJ)
@@ -73,4 +75,4 @@ fclean	:	clean
 
 re		:	fclean all
 
-.PHONY	:	all clean fclean re
+.PHONY	:	all bonus clean fclean re
