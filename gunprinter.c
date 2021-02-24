@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gunprinter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 11:37:19 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/02/19 17:57:42 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/24 14:02:25 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,12 @@ void	gunrender(t_hook *h)
 
 void	gunprinter(t_hook *h)
 {
-	print_life(h);
-	print_level(h);
-	mirino(h);
-	gunrender(h);
+	if (h->var.ry > 100)
+	{
+		print_life(h);
+		print_level(h);
+		gunrender(h);
+	}
+	if (h->var.ry > 15)
+		mirino(h);
 }

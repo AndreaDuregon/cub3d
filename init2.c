@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 14:04:18 by sgiovo            #+#    #+#             */
-/*   Updated: 2021/02/20 11:43:51 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/02/24 16:42:34 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,20 @@ char			**minimap_init(char **minimap, char **map)
 	return (minimap);
 }
 
-void			tex_control(t_hook *h)
+void			tex_control(t_hook *h, int swc, int swf)
 {
-	int i;
-
-	i = 0;
+	if ((swc && swf))
+	{
+		if (!(h->tex[5]) || !(h->tex[6]))
+		{
+			printf("Error\nTexture doesn't exist\n");
+			free_tex(h);
+			exit(0);
+		}
+	}
 	if (!(h->tex[0]) || !(h->tex[1]) || !(h->tex[2]) ||
-		!(h->tex[3]) || !(h->tex[4]) || !(h->tex[5]) ||
-		!(h->tex[6]) || !(h->tex[7]) || !(h->tex[8]) ||
-		!(h->tex[9]) || !(h->tex[10]))
+		!(h->tex[3]) || !(h->tex[4]) || !(h->tex[7]) ||
+		!(h->tex[8]) || !(h->tex[9]) || !(h->tex[10]))
 	{
 		printf("Error\nTexture doesn't exist\n");
 		free_tex(h);
@@ -79,5 +84,5 @@ void			set_text(t_hook *h, t_var var, t_vars vars)
 														&width, &height);
 	h->tex[10] = mlx_xpm_file_to_image(vars.mlx, "./texture/gameover.xpm",
 														&width, &height);
-	tex_control(h);
+	tex_control(h, var.swc, var.swf);
 }
