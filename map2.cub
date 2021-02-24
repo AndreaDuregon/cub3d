@@ -1,11 +1,11 @@
-R 100 100
+R 1111100 111100
 NO ./texture/wallbrick.xpm
 SO ./texture/wallbrick2.xpm
 WE ./texture/wallbrick2.xpm
 EA ./texture/wallbrick2.xpm
 S ./texture/zombib.xpm
-F 255,0,0
-C       0,255,255
+F ./texture/moquette.xpm
+C      ./texture/moldwall.xpm
 
 
 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
